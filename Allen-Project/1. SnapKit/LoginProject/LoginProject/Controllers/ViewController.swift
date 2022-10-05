@@ -14,6 +14,12 @@ final class ViewController: UIViewController {
     
     // MARK: - Properties
     
+    private let logoImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = #imageLiteral(resourceName: "logo")
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
     private let emailTextFieldView = CustomTextFieldView()
     private var emailInfoLable = CustomInfoLabel(info: "이메일 주소 또는 전화번호")
     private lazy var emailTextField = CustomTextField()
@@ -106,11 +112,17 @@ final class ViewController: UIViewController {
         passwordTextFieldView.addSubview(passwordSecureButton)
         passwordTextField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
         
+        view.addSubview(logoImageView)
         view.addSubview(stackView)
         view.addSubview(passwordResetButton)
     }
 
     func autoLayout() {
+        
+        logoImageView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(17)
+            make.leading.trailing.equalToSuperview().inset(150)
+        }
 
         emailTextField.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(8)
