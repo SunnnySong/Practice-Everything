@@ -11,27 +11,44 @@ import Charts
 
 final class DataManager {
     
-    var entries: [BarChartDataEntry] = []
-    
-    func setData() -> [BarChartDataEntry] {
-        entries = MoneyData.dataEntriesForMonth(year: 2019, moneyData: MoneyData.rowData)
-        return entries
-    }
-    
-    func formatDataSet() -> BarChartData {
-        let dataEntry = setData()
-        let minus = dataEntry.filter { $0.y < 0 }
-        let plus = dataEntry.filter { $0.y > 0 }
+    func setChartDataSet(completionHandler: ([BarChartDataSet]) -> [BarChartDataSet]) -> [BarChartDataSet] {
+        let entries = MoneyData.dataEntriesForMonth(year: 2019, moneyData: MoneyData.rowData)
+
+        let minus = entries.filter { $0.y < 0 }
+        let plus = entries.filter { $0.y > 0 }
 
         let minusSet = BarChartDataSet(entries: minus)
         let plusSet = BarChartDataSet(entries: plus)
-        minusSet.label = nil
-        plusSet.label = nil
+        
+        let dataSets = completionHandler(formatDataSet(minusSet: minusSet, plusSet: plusSet))
+        
+        return dataSets
+    }
 
+    func formatDataSet(minusSet: BarChartDataSet, plusSet: BarChartDataSet) -> [BarChartDataSet] {
+        // 마이너스면 파란색바, 플러스면 분홍색바
         minusSet.colors = [ NSUIColor(hex: "#A8C8F9") ]
         plusSet.colors = [ NSUIColor(hex: "#FC9EBD") ]
+        
+        // 색깔 별 바가 무엇을 의미하는지 Label
+        // [ViewController.swift] chartView.legend.enasbled = false로 막아둠.
+//        minusSet.label = nil
+//        plusSet.label = nil
+        
+        
+        // bar 위의 숫자 formatter 설정
+//        let formatter = NumberFormatter()
+//        formatter.numberStyle = .currency
+//        formatter.locale = Locale(identifier: "ko-KR")
+//        minusSet.valueFormatter = DefaultValueFormatter(formatter: formatter)
+        
+        return [ minusSet, plusSet ]
+    }
 
-        let data = BarChartData(dataSets: [minusSet, plusSet])
+    func setChartData() -> BarChartData {
+        let chartData = setChartDataSet { $0 }
+        let data = BarChartData(dataSets: chartData)
+        
         return data
     }
 }

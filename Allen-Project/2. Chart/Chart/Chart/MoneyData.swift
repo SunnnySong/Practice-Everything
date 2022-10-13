@@ -14,7 +14,7 @@ struct MoneyData {
     var month: Double
     var money: Double
     
-    static var month = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
+    static var monthLabel = ["", "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
     
     static var rowData: [MoneyData] = [
         
@@ -23,7 +23,7 @@ struct MoneyData {
         MoneyData(year: 2019, month: 3, money: -11500),
         MoneyData(year: 2019, month: 4, money: 70000),
         MoneyData(year: 2019, month: 5, money: -80000),
-        MoneyData(year: 2019, month: 6, money: 100000),
+        MoneyData(year: 2019, month: 6, money: 10000),
         MoneyData(year: 2019, month: 7, money: -50000),
         MoneyData(year: 2019, month: 8, money: -95000),
         MoneyData(year: 2019, month: 9, money: 20000),
