@@ -29,33 +29,7 @@ struct MoneyData {
         MoneyData(year: 2019, month: 9, money: 20000),
         MoneyData(year: 2019, month: 10, money: 50000),
         MoneyData(year: 2019, month: 11, money: -50000),
-        MoneyData(year: 2019, month: 12, money: -30000),
-        
-        MoneyData(year: 2020, month: 1, money: -50000),
-        MoneyData(year: 2020, month: 2, money: 200000),
-        MoneyData(year: 2020, month: 3, money: -11500),
-        MoneyData(year: 2020, month: 4, money: 70000),
-        MoneyData(year: 2020, month: 5, money: -80000),
-        MoneyData(year: 2020, month: 6, money: 100000),
-        MoneyData(year: 2020, month: 7, money: -50000),
-        MoneyData(year: 2020, month: 8, money: -95000),
-        MoneyData(year: 2020, month: 9, money: 20000),
-        MoneyData(year: 2020, month: 10, money: 50000),
-        MoneyData(year: 2020, month: 11, money: -50000),
-        MoneyData(year: 2020, month: 12, money: -30000),
-        
-        MoneyData(year: 2021, month: 1, money: -50000),
-        MoneyData(year: 2021, month: 2, money: 200000),
-        MoneyData(year: 2021, month: 3, money: -11500),
-        MoneyData(year: 2021, month: 4, money: 70000),
-        MoneyData(year: 2021, month: 5, money: -80000),
-        MoneyData(year: 2021, month: 6, money: 100000),
-        MoneyData(year: 2021, month: 7, money: -50000),
-        MoneyData(year: 2021, month: 8, money: -95000),
-        MoneyData(year: 2021, month: 9, money: 20000),
-        MoneyData(year: 2021, month: 10, money: 50000),
-        MoneyData(year: 2021, month: 11, money: -50000),
-        MoneyData(year: 2021, month: 12, money: -30000)
+        MoneyData(year: 2019, month: 12, money: -30000)
     ]
     
     static func dataEntriesForMonth(year: Int, moneyData: [MoneyData]) -> [BarChartDataEntry] {

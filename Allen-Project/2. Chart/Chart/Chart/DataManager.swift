@@ -35,8 +35,11 @@ final class DataManager {
 //        minusSet.label = nil
 //        plusSet.label = nil
         
+        // bar 위 숫자 설정
+//        minusSet.valueColors = [ NSUIColor.red ]
+        minusSet.drawValuesEnabled = true
         
-        // bar 위의 숫자 formatter 설정
+        // bar 위의 숫자 formatter 설정 -> 근데 안됌. 왜?
 //        let formatter = NumberFormatter()
 //        formatter.numberStyle = .currency
 //        formatter.locale = Locale(identifier: "ko-KR")

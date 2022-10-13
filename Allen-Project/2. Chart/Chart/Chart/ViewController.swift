@@ -11,12 +11,23 @@ import SnapKit
 
 // 자세한 설명: https://www.youtube.com/watch?v=csd7pyfEXgw
 class ViewController: UIViewController {
-
+    
+    private var label: UILabel = {
+        let la = UILabel()
+        la.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        la.textColor = .red
+        la.text = "과연 얼마를 날렸을까요?"
+        return la
+    }()
+    
     private lazy var chartView: BarChartView = {
         let chartView = BarChartView()
+        chartView.delegate = self
+        
         chartView.backgroundColor = UIColor(hex: "#FFDDA6").withAlphaComponent(0.3)
         chartView.layer.cornerRadius = 20
         chartView.clipsToBounds = true
+        
         // chart와 BarChartView 간 bottom 간격 조정
         chartView.extraBottomOffset = 15
         // 차트 확대
@@ -49,21 +60,29 @@ class ViewController: UIViewController {
 //        chartView.leftAxis.labelTextColor = .red
         
         chartView.xAxis.labelTextColor = .black
-        chartView.xAxis.labelFont = UIFont.systemFont(ofSize: 12, weight: .bold)
+        chartView.xAxis.labelFont = UIFont.systemFont(ofSize: 11, weight: .bold)
         
         // 1월부터 12월까지 표시
         chartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: MoneyData.monthLabel)
         chartView.xAxis.setLabelCount(12, force: false)
         chartView.xAxis.labelPosition = .bottom
+        // bar 별 xAxis 세로선 삭제하기
+        chartView.xAxis.drawGridLinesEnabled = false
     }
 
     func barChartLayout() {
         view.addSubview(chartView)
+        view.addSubview(label)
         
         chartView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
             make.left.right.equalToSuperview().inset(20)
             make.height.equalTo(300)
+        }
+        
+        label.snp.makeConstraints { make in
+            make.top.equalTo(chartView.snp_bottom).offset(20)
+            make.centerX.equalToSuperview()
         }
     }
     
@@ -79,6 +98,7 @@ extension ViewController: ChartViewDelegate {
     
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         
-        print(entry)
+        print(String(Int(entry.y)))
+        label.text = "\(Int(entry.y))원"
     }
 }
