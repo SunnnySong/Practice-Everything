@@ -13,8 +13,20 @@ class ViewController: UIViewController {
 
     private lazy var barChartView: BarChartView = {
         let chartView = BarChartView()
-        chartView.backgroundColor = .systemPink
-        chartView.
+        chartView.backgroundColor = UIColor(hex: "#FFDDA6").withAlphaComponent(0.3)
+        // 오른쪽 금액 표시 비활성화
+        chartView.rightAxis.enabled = false
+        chartView.leftAxis.labelTextColor = .black
+        
+        chartView.xAxis.labelTextColor = .black
+        chartView.xAxis.labelPosition = .bottom
+        chartView.xAxis.labelFont = UIFont.systemFont(ofSize: 12, weight: .bold)
+        // 1월부터 12월까지 표시
+        chartView.xAxis.setLabelCount(12, force: false)
+        
+        chartView.leftAxis.drawZeroLineEnabled = true
+        chartView.leftAxis.zeroLineWidth = 3
+
         return chartView
     }()
     
@@ -37,7 +49,7 @@ class ViewController: UIViewController {
     
     func settingData() {
         let dataManager = DataManager()
-        barChartView.data = dataManager.setData()
+        barChartView.data = dataManager.formatDataSet()
     }
     
 }

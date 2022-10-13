@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4F03E0E128F6C95D0086F186 /* CreateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F03E0E028F6C95D0086F186 /* CreateData.swift */; };
+		4F03E0E128F6C95D0086F186 /* MoneyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F03E0E028F6C95D0086F186 /* MoneyData.swift */; };
 		4F03E0E328F6CC8C0086F186 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F03E0E228F6CC8C0086F186 /* DataManager.swift */; };
 		4F72B6A428F4758B0015AA8B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F72B6A328F4758B0015AA8B /* AppDelegate.swift */; };
 		4F72B6A628F4758B0015AA8B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F72B6A528F4758B0015AA8B /* SceneDelegate.swift */; };
@@ -19,7 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4F03E0E028F6C95D0086F186 /* CreateData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateData.swift; sourceTree = "<group>"; };
+		4F03E0E028F6C95D0086F186 /* MoneyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyData.swift; sourceTree = "<group>"; };
 		4F03E0E228F6CC8C0086F186 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		4F72B6A028F4758B0015AA8B /* Chart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F72B6A328F4758B0015AA8B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -78,7 +78,7 @@
 				4F72B6A328F4758B0015AA8B /* AppDelegate.swift */,
 				4F72B6A528F4758B0015AA8B /* SceneDelegate.swift */,
 				4F72B6A728F4758B0015AA8B /* ViewController.swift */,
-				4F03E0E028F6C95D0086F186 /* CreateData.swift */,
+				4F03E0E028F6C95D0086F186 /* MoneyData.swift */,
 				4F03E0E228F6CC8C0086F186 /* DataManager.swift */,
 				4F72B6A928F4758B0015AA8B /* Main.storyboard */,
 				4F72B6AC28F4758D0015AA8B /* Assets.xcassets */,
@@ -214,7 +214,7 @@
 			files = (
 				4F72B6A828F4758B0015AA8B /* ViewController.swift in Sources */,
 				4F72B6A428F4758B0015AA8B /* AppDelegate.swift in Sources */,
-				4F03E0E128F6C95D0086F186 /* CreateData.swift in Sources */,
+				4F03E0E128F6C95D0086F186 /* MoneyData.swift in Sources */,
 				4F72B6A628F4758B0015AA8B /* SceneDelegate.swift in Sources */,
 				4F03E0E328F6CC8C0086F186 /* DataManager.swift in Sources */,
 			);
