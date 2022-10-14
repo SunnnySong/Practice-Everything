@@ -37,12 +37,15 @@ final class DataManager {
         
         // bar 위 숫자 설정
 //        minusSet.valueColors = [ NSUIColor.red ]
-        minusSet.drawValuesEnabled = true
+        minusSet.drawValuesEnabled = false
+        plusSet.drawValuesEnabled = false
         
         // bar 위의 숫자 formatter 설정 -> 근데 안됌. 왜?
 //        let formatter = NumberFormatter()
-//        formatter.numberStyle = .currency
-//        formatter.locale = Locale(identifier: "ko-KR")
+//        formatter.minimumFractionDigits = 0
+//        formatter.maximumFractionDigits = 1
+//        formatter.negativeSuffix = " 원"
+//        formatter.positiveSuffix = " 원"
 //        minusSet.valueFormatter = DefaultValueFormatter(formatter: formatter)
         
         return [ minusSet, plusSet ]

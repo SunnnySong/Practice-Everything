@@ -10,7 +10,14 @@ import Charts
 import SnapKit
 
 // 자세한 설명: https://www.youtube.com/watch?v=csd7pyfEXgw
+
+// bar 모서리 라운드 처리 : https://wlxo0401.oopy.io/8082412e-80e9-4f79-b2a1-164a9036fc6f
+
+
 class ViewController: UIViewController {
+    
+    private let dataManager = DataManager()
+    private let customMarkerView = CustomMarkerView()
     
     private var label: UILabel = {
         let la = UILabel()
@@ -30,12 +37,17 @@ class ViewController: UIViewController {
         
         // chart와 BarChartView 간 bottom 간격 조정
         chartView.extraBottomOffset = 15
+        chartView.extraLeftOffset = 15
+        chartView.extraRightOffset = 15
         // 차트 확대
 //        chartView.zoom(scaleX: 1.5, scaleY: 1, x: 0, y: 0)
         // 차트 더블클릭하면 무한 확대되는것 false
         chartView.setScaleEnabled(false)
         // 바 별 뭘 의미하는지 알려주는 것
         chartView.legend.enabled = false
+        
+        // https://medium.com/geekculture/swift-ios-charts-tutorial-highlight-selected-value-with-a-custom-marker-30ccbf92aa1b
+//        chartView.data?.isHighlightEnabled = true
         return chartView
     }()
     
@@ -46,6 +58,12 @@ class ViewController: UIViewController {
         settingData()
         barChartConfiguration()
         
+        setMarker()
+    }
+    
+    func setMarker() {
+        customMarkerView.chartView = chartView
+        chartView.marker = customMarkerView
     }
     
     func barChartConfiguration() {
@@ -81,13 +99,12 @@ class ViewController: UIViewController {
         }
         
         label.snp.makeConstraints { make in
-            make.top.equalTo(chartView.snp_bottom).offset(20)
+            make.top.equalTo(chartView.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
         }
     }
     
     func settingData() {
-        let dataManager = DataManager()
         chartView.data = dataManager.setChartData()
     }
     
@@ -96,9 +113,8 @@ class ViewController: UIViewController {
 
 extension ViewController: ChartViewDelegate {
     
+    // bar 클릭시 실행되는 함수
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-        
-        print(String(Int(entry.y)))
-        label.text = "\(Int(entry.y))원"
+        customMarkerView.moneyLabel.text = "\(Int(entry.y)) 원"
     }
 }

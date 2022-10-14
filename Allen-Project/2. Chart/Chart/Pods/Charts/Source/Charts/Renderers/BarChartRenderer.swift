@@ -379,7 +379,12 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 context.setFillColor(dataSet.color(atIndex: j).cgColor)
             }
             
-            context.fill(barRect)
+//            context.fill(barRect)
+            // bar 모서리 라운드 처리
+            // https://wlxo0401.oopy.io/8082412e-80e9-4f79-b2a1-164a9036fc6f
+            let bezierPath = UIBezierPath(roundedRect: barRect, cornerRadius: 7)
+            context.addPath(bezierPath.cgPath)
+            context.drawPath(using: .fill)
             
             if drawBorder
             {
@@ -744,7 +749,11 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 
                 setHighlightDrawPos(highlight: high, barRect: barRect)
                 
-                context.fill(barRect)
+//                context.fill(barRect)
+                // Highlight 바 모서리 라운드 처리
+                let bezierPath = UIBezierPath(roundedRect: barRect, cornerRadius: 7)
+                context.addPath(bezierPath.cgPath)
+                context.drawPath(using: .fill)
             }
         }
     }
