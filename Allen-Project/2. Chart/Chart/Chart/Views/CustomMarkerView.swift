@@ -37,7 +37,6 @@ class CustomMarkerView: MarkerView {
         markerBoard.clipsToBounds = true
         markerBoard.layer.cornerRadius = 5
         
-        self.offset = CGPoint(x: -(markerBoard.frame.width / 2), y: chartView?.data?.yMax==0 ? -50 : 30)
-//        self.offset = CGPoint(x: self.frame.width, y: -self.frame.maxY)
+        self.offset = CGPoint(x: -(markerBoard.frame.width / 2), y: -(markerBoard.frame.height + 3))
     }
 }

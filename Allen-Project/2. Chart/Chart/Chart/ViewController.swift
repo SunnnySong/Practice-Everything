@@ -36,9 +36,11 @@ class ViewController: UIViewController {
         chartView.clipsToBounds = true
         
         // chart와 BarChartView 간 bottom 간격 조정
-        chartView.extraBottomOffset = 15
-        chartView.extraLeftOffset = 15
-        chartView.extraRightOffset = 15
+        chartView.extraBottomOffset = 20
+        chartView.extraLeftOffset = 20
+        chartView.extraRightOffset = 20
+        chartView.extraTopOffset = 20
+    
         // 차트 확대
 //        chartView.zoom(scaleX: 1.5, scaleY: 1, x: 0, y: 0)
         // 차트 더블클릭하면 무한 확대되는것 false
@@ -115,6 +117,8 @@ extension ViewController: ChartViewDelegate {
     
     // bar 클릭시 실행되는 함수
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        
         customMarkerView.moneyLabel.text = "\(Int(entry.y)) 원"
+        label.text = "\(Int(entry.y)) 원"
     }
 }
