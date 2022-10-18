@@ -13,6 +13,8 @@
 		4F02D13C28FDA54D006619BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F02D13A28FDA54D006619BE /* Main.storyboard */; };
 		4F02D13E28FDA54F006619BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F02D13D28FDA54F006619BE /* Assets.xcassets */; };
 		4F02D14128FDA54F006619BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F02D13F28FDA54F006619BE /* LaunchScreen.storyboard */; };
+		4F02D14A28FE8BC2006619BE /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02D14928FE8BC2006619BE /* CalendarView.swift */; };
+		4F02D14C28FEBDE5006619BE /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02D14B28FEBDE5006619BE /* CalendarCell.swift */; };
 		8174F5890DBEE433898590BD /* Pods_FSCalendar_practice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6BEA76C7ABA85E75A289C8D /* Pods_FSCalendar_practice.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +28,8 @@
 		4F02D13D28FDA54F006619BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F02D14028FDA54F006619BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4F02D14228FDA54F006619BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4F02D14928FE8BC2006619BE /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		4F02D14B28FEBDE5006619BE /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		B6BEA76C7ABA85E75A289C8D /* Pods_FSCalendar_practice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FSCalendar_practice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8CFCA179775169ABDF1048B /* Pods-FSCalendar_practice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FSCalendar_practice.release.xcconfig"; path = "Target Support Files/Pods-FSCalendar_practice/Pods-FSCalendar_practice.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -74,6 +78,7 @@
 				4F02D13428FDA54D006619BE /* AppDelegate.swift */,
 				4F02D13628FDA54D006619BE /* SceneDelegate.swift */,
 				4F02D13828FDA54D006619BE /* ViewController.swift */,
+				4F02D14828FE8BAF006619BE /* Calendar */,
 				4F02D13A28FDA54D006619BE /* Main.storyboard */,
 				4F02D13D28FDA54F006619BE /* Assets.xcassets */,
 				4F02D13F28FDA54F006619BE /* LaunchScreen.storyboard */,
@@ -82,13 +87,21 @@
 			path = FSCalendar_practice;
 			sourceTree = "<group>";
 		};
+		4F02D14828FE8BAF006619BE /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				4F02D14928FE8BC2006619BE /* CalendarView.swift */,
+				4F02D14B28FEBDE5006619BE /* CalendarCell.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
 		E18D59ECCE459C83341CF3AE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				4B2312DE19C68CA226F9D6AD /* Pods-FSCalendar_practice.debug.xcconfig */,
 				B8CFCA179775169ABDF1048B /* Pods-FSCalendar_practice.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -210,6 +223,8 @@
 				4F02D13928FDA54D006619BE /* ViewController.swift in Sources */,
 				4F02D13528FDA54D006619BE /* AppDelegate.swift in Sources */,
 				4F02D13728FDA54D006619BE /* SceneDelegate.swift in Sources */,
+				4F02D14A28FE8BC2006619BE /* CalendarView.swift in Sources */,
+				4F02D14C28FEBDE5006619BE /* CalendarCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
