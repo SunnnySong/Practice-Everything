@@ -21,8 +21,6 @@ final class DataManager {
         }
         // ver 2.
 //        let data = lottoData.map({ (value: LottoData) -> LottoDataWithDate in return LottoDataWithDate(buyDate: dataFormatter.date(from: value.buyDate)!, lottoType: value.lottoType, lottoAmount: value.lottoAmount)})
-        
-        print(newData)
         return newData
     }
 }

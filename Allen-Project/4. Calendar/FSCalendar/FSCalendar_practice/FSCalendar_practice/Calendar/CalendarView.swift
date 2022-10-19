@@ -16,10 +16,12 @@ enum extensionNum {
 }
 
 class CalendarView: FSCalendar {
-    
-    var extensionState = extensionNum.down
+
+    private var extensionState = extensionNum.down
     // events dot 관련 변수
-    var eventsArray = DataManager.changeStringToDate()
+    private var eventsArray = DataManager.changeStringToDate()
+    // LottoListView()와 selectedDate 공유 위한 변수
+    var selectDate = Date()
     
     // MARK: - Properties
     
@@ -170,7 +172,9 @@ extension CalendarView: FSCalendarDelegate {
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .full
+        self.selectDate = date
         print(dateFormatter.string(from: date) + " 날짜 선택 완료")
+        print(selectedDate)
     }
     
     func calendar(_ calendar: FSCalendar, didDeselect date: Date, at monthPosition: FSCalendarMonthPosition) {

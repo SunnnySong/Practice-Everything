@@ -13,13 +13,7 @@ class ViewController: UIViewController {
 
     let calendar = CalendarView()
     
-    let dataView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(hex: "fcc0ec", alpha: 0.72)
-        view.layer.cornerRadius = 20
-        view.clipsToBounds = true
-        return view
-    }()
+    let dataView = LottoListView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
