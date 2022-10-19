@@ -13,6 +13,14 @@ class ViewController: UIViewController {
 
     let calendar = CalendarView()
     
+    let dataView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(hex: "fcc0ec", alpha: 0.72)
+        view.layer.cornerRadius = 20
+        view.clipsToBounds = true
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,11 +29,17 @@ class ViewController: UIViewController {
 
     private func layoutCal() {
         view.addSubview(calendar)
-        
         calendar.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(15)
             make.top.equalToSuperview().inset(100)
             make.height.equalTo(330)
+        }
+        
+        view.addSubview(dataView)
+        dataView.snp.makeConstraints { make in
+            make.top.equalTo(calendar.snp.bottom).offset(20)
+            make.left.right.equalToSuperview().inset(15)
+            make.height.equalTo(100)
         }
     }
 }
