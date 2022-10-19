@@ -43,8 +43,27 @@ class CalendarView: FSCalendar {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        extensionSpacing()
+    }
+    
     // MARK: - Helpers
 
+    func extensionSpacing() {
+        // 확장 화살표 넣기 위한 bottom 공간 확보
+        if scope == .month {
+            self.snp.updateConstraints { make in
+                make.height.equalTo(360)
+            }
+        } else {
+            self.snp.updateConstraints { make in
+                make.height.equalTo(160)
+            }
+        }
+    }
+    
     func configuareCal() {
         delegate = self
         addSubview(extensionButton)
@@ -52,9 +71,6 @@ class CalendarView: FSCalendar {
         backgroundColor = UIColor(hex: "5294F9", alpha: 0.12)
         layer.cornerRadius = 20
         clipsToBounds = true
-        
-        // 주간 / 월간 모드
-//        scope = .week
         
         // header
         // header 에 흐릿하게 보이는 년, 월 없애기
@@ -64,9 +80,6 @@ class CalendarView: FSCalendar {
     }
     
     func configuareExtensionBtn() {
-        // 확장 화살표 넣기 위한 bottom 공간 확보
-        self.collectionViewLayout.sectionInsets.bottom = 25
-        
         // autoLayout
         extensionButton.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(10)
@@ -93,7 +106,6 @@ extension CalendarView: FSCalendarDelegate {
         
         calendar.snp.updateConstraints { (make) in
             make.height.equalTo(bounds.height)
-            // Do other updates
         }
         self.superview?.layoutIfNeeded()
     }
