@@ -12,6 +12,7 @@ import SnapKit
 class ViewController: UIViewController {
 
     let calendar = CalendarView()
+    
     let lottoListdataManager = DataManager()
     let lottoListCell = LottoTableViewCell()
     
@@ -100,7 +101,7 @@ extension ViewController: FSCalendarDelegate {
         calendar.snp.updateConstraints { (make) in
             make.height.equalTo(bounds.height)
         }
-        self.calendar.layoutIfNeeded()
+        self.view.layoutIfNeeded()
     }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
