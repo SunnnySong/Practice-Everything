@@ -17,11 +17,8 @@ enum extensionNum {
 
 class CalendarView: FSCalendar {
 
-    private var extensionState = extensionNum.down
-    // events dot 관련 변수
-    private var eventsArray = DataManager.changeStringToDate()
-    // LottoListView()와 selectedDate 공유 위한 변수
-    var selectDate = Date()
+    // calendar week / month 변경하는 버튼 관련 변수
+    var extensionState = extensionNum.down
     
     // MARK: - Properties
     
@@ -88,8 +85,6 @@ class CalendarView: FSCalendar {
     }
     
     func configuareCal() {
-        delegate = self
-        dataSource = self
         
         backgroundColor = UIColor(hex: "5294F9", alpha: 0.12)
         layer.cornerRadius = 20
@@ -111,7 +106,6 @@ class CalendarView: FSCalendar {
     func configuareMonthBtn() {
         addSubview(preMonthButton)
         addSubview(nextMonthButton)
-        
         
         // autoLayout 잡을때, calendarHeaderView가 아니라 date에 걸어야함. 나중 시도!!!!!!!!
         preMonthButton.snp.makeConstraints { make in
@@ -154,45 +148,5 @@ class CalendarView: FSCalendar {
     
     @objc func handleNextMonthBtn() {
         print("next")
-    }
-}
-
-
-// FSCalendarDelegate
-extension CalendarView: FSCalendarDelegate {
-    // Calendar 주간, 월간 원활한 크기 변화를 위해
-    func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
-        
-        calendar.snp.updateConstraints { (make) in
-            make.height.equalTo(bounds.height)
-        }
-        self.superview?.layoutIfNeeded()
-    }
-    
-    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .full
-        self.selectDate = date
-        print(dateFormatter.string(from: date) + " 날짜 선택 완료")
-        print(selectedDate)
-    }
-    
-    func calendar(_ calendar: FSCalendar, didDeselect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .full
-        print(dateFormatter.string(from: date) + " 날짜 선택 완료")
-    }
-}
-
-// FSCalendarDataSource
-extension CalendarView: FSCalendarDataSource {
-    
-    // event가 있다면 글자 밑에 표시하기
-    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        let dateArray = eventsArray.map { $0.buyDate }
-        if dateArray.contains(date) {
-            return 1
-        }
-        return 0
     }
 }

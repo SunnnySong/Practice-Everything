@@ -17,7 +17,7 @@
 		4F02D14C28FEBDE5006619BE /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02D14B28FEBDE5006619BE /* CalendarCell.swift */; };
 		4F02D14F290034C9006619BE /* LottoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02D14E290034C9006619BE /* LottoData.swift */; };
 		4F02D1512900399A006619BE /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02D1502900399A006619BE /* DataManager.swift */; };
-		4F02D154290056BF006619BE /* LottoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02D153290056BF006619BE /* LottoListView.swift */; };
+		4F02D15729058665006619BE /* LottoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02D15629058665006619BE /* LottoTableViewCell.swift */; };
 		8174F5890DBEE433898590BD /* Pods_FSCalendar_practice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6BEA76C7ABA85E75A289C8D /* Pods_FSCalendar_practice.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,7 +35,7 @@
 		4F02D14B28FEBDE5006619BE /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		4F02D14E290034C9006619BE /* LottoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoData.swift; sourceTree = "<group>"; };
 		4F02D1502900399A006619BE /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
-		4F02D153290056BF006619BE /* LottoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoListView.swift; sourceTree = "<group>"; };
+		4F02D15629058665006619BE /* LottoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoTableViewCell.swift; sourceTree = "<group>"; };
 		B6BEA76C7ABA85E75A289C8D /* Pods_FSCalendar_practice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FSCalendar_practice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8CFCA179775169ABDF1048B /* Pods-FSCalendar_practice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FSCalendar_practice.release.xcconfig"; path = "Target Support Files/Pods-FSCalendar_practice/Pods-FSCalendar_practice.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,6 +83,7 @@
 			children = (
 				4F02D13428FDA54D006619BE /* AppDelegate.swift */,
 				4F02D13628FDA54D006619BE /* SceneDelegate.swift */,
+				4F02D15529058642006619BE /* Controllers */,
 				4F02D1522900568D006619BE /* Views */,
 				4F02D14D290034B8006619BE /* Data */,
 				4F02D14828FE8BAF006619BE /* Calendar */,
@@ -115,10 +116,17 @@
 		4F02D1522900568D006619BE /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4F02D13828FDA54D006619BE /* ViewController.swift */,
-				4F02D153290056BF006619BE /* LottoListView.swift */,
+				4F02D15629058665006619BE /* LottoTableViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		4F02D15529058642006619BE /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4F02D13828FDA54D006619BE /* ViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		E18D59ECCE459C83341CF3AE /* Pods */ = {
@@ -248,11 +256,11 @@
 				4F02D13928FDA54D006619BE /* ViewController.swift in Sources */,
 				4F02D13528FDA54D006619BE /* AppDelegate.swift in Sources */,
 				4F02D13728FDA54D006619BE /* SceneDelegate.swift in Sources */,
+				4F02D15729058665006619BE /* LottoTableViewCell.swift in Sources */,
 				4F02D1512900399A006619BE /* DataManager.swift in Sources */,
 				4F02D14A28FE8BC2006619BE /* CalendarView.swift in Sources */,
 				4F02D14F290034C9006619BE /* LottoData.swift in Sources */,
 				4F02D14C28FEBDE5006619BE /* CalendarCell.swift in Sources */,
-				4F02D154290056BF006619BE /* LottoListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
