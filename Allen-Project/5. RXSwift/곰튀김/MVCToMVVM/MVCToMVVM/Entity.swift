@@ -7,6 +7,7 @@
 
 import Foundation
 
+// 서버나 DB에서 가져온 데이터 그 자체. row data.
 struct UtcTimeModel: Codable {
     let id: String
     let currentDateTime: String
