@@ -51,11 +51,13 @@ class ViewController: UIViewController {
                     emitter.onNext(json)
                 }
                 emitter.onCompleted()
-                /*
+                /* 클로저 내 순환참조
+                 
                  f.onCompleted() : 아래 subscribe 클로저 안에서 순환참조 문제가 발생하게 됌
                  <해결 방법>
                  1. subscribe 클로저 안에서 [weak self] 사용
                  2. f.onNext 다음에 f.onCompleted() 실행 : subscribe 클로저가 생성되면서 reference count가 올라가기 때문에, 클로저를 종료시킴으로써 RC를 줄임. 클로저는 onCompleted()나 onError() 가 실행되면 역할이 끝났다고 판단되어 클로저 자체가 종료됌. 그러므로 weak self를 사용하지 않아도 순환참조가 발생되지 않음.
+                 3. disposable.dispose() 하게 되면 함수 실행이 중지되기 때문에 클로저 종료.
 
                  */
             }
@@ -76,6 +78,7 @@ class ViewController: UIViewController {
      - Observable의 생명 주기
         : Create -> Subscribe(실행) -> onNext -> onCompleted / onError -> Disposed
         : 한번 onCompleted / onError 된 subscribe 코드는 재사용 불가. 한번 생성된 Observable에 새로운 subscribe를 주고 재사용해야함.
+        : Observable.create() 는 anonymousObservable 리턴
      
      - Observable이 데이터를 발행한 후 보내는 알림
      1. onNext : 데이터의 발행 알림
@@ -153,23 +156,26 @@ class ViewController: UIViewController {
         setVisibleWithAnimation(self.activityIndicator, true)
         
         // 2. Observable로 오는 데이터를 받아서 처리하는 방법
-        downloadJson(MEMBER_LIST_URL)
-            .debug() // 윗줄과 아랫줄 코드 사이 데이터 이동이 다 찍힘.
-            .subscribe { event in
-                // 위에 Observable<String?>이 나중에 생기면 subscribe 실행
-                switch event {
-                case .next(let json) :
-                    // UI 관련 요소들은 main Thread에서 변경
-                    DispatchQueue.main.async {
-                        self.editView.text = json
-                        self.setVisibleWithAnimation(self.activityIndicator, false)
-                    }
-                case .completed :
-                    break
-                case .error :
-                    break
-                }
-            }
+        let observable = downloadJson(MEMBER_LIST_URL)
+        // observable을 subscribe하면 return되는 값 = disposable
+        let disposable = observable
+                            .debug() // 윗줄과 아랫줄 코드 사이 데이터 이동이 다 찍힘.
+                            .subscribe { event in
+                                // 위에 Observable<String?>이 나중에 생기면 subscribe 실행
+                                switch event {
+                                case .next(let json) :
+                                    // UI 관련 요소들은 main Thread에서 변경
+                                    DispatchQueue.main.async {
+                                        self.editView.text = json
+                                        self.setVisibleWithAnimation(self.activityIndicator, false)
+                                    }
+                                case .completed :
+                                    break
+                                case .error :
+                                    break
+                                }
+                            }
+//        disposable.dispose() : disposable을 중지하는 함수
     }
     
     
