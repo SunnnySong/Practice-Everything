@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     @IBOutlet var editView: UITextView!
     
     // disposable 해야하는 항목이 여러개일때
+    // ViewController의 멤버변수로, ViewController가 사라지는 시점에 dispose를 강제시키면 멤버변수인 disposableBag까지 모두 메모리 해제 가능 (참조 : https://iamchiwon.github.io/2018/08/13/closure-mem/)
     var disposableBag = DisposeBag()
 
     override func viewDidLoad() {
@@ -56,6 +57,7 @@ class ViewController: UIViewController {
                 }
                 emitter.onCompleted()
                 /* 클로저 내 순환참조
+                 참조 : https://iamchiwon.github.io/2018/08/13/closure-mem/
                  
                  f.onCompleted() : 아래 subscribe 클로저 안에서 순환참조 문제가 발생하게 됌
                  <해결 방법>
