@@ -16,6 +16,9 @@ let MEMBER_LIST_URL = "https://my.api.mockaroo.com/members_with_avatar.json?key=
 class ViewController: UIViewController {
     @IBOutlet var timerLabel: UILabel!
     @IBOutlet var editView: UITextView!
+    
+    // disposable 해야하는 항목이 여러개일때
+    var disposableBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +26,7 @@ class ViewController: UIViewController {
             self?.timerLabel.text = "\(Date().timeIntervalSince1970)"
         }
     }
-
+    
     private func setVisibleWithAnimation(_ v: UIView?, _ s: Bool) {
         guard let v = v else { return }
         UIView.animate(withDuration: 0.3, animations: { [weak v] in
@@ -38,6 +41,7 @@ class ViewController: UIViewController {
     func downloadJson(_ url: String) -> Observable<String?> {
         // RXSwift : 비동기적으로 나중에 생성되는 데이터를 return 값으로 전달해주는 utility
         // Observable<String> : 나중에 생길 데이터, subscribe : 나중에 데이터 나오면 실행되는 것
+        
         return Observable.create() { emitter in
             let url = URL(string: url)!
             // URLSession은 자체적으로 비동기 처리
@@ -99,6 +103,29 @@ class ViewController: UIViewController {
             return Disposables.create()
         }
      }
+     
+     - Observable 생성 종류
+     1. Observable.just("Hello") : 자동으로 onNext, onComplete, onError -> Disposables.create() 호출
+        -> 데이터 그대로 발행되기 때문에 map과 같은 연산자로 변환 가능
+     2. Observable.from(["Hello","World"]) : just는 1개의 데이터만 전달 가능, from은 여러개의 데이터를 array로 전달해 순차적으로 전달 가능.
+     
+     - sugar api
+     : .subscribe { event in switch ~ } 풀로 작성하기에 번거로움.
+        -> .subscribe(onNext: { print($0) }) / .subscribe(onNext: { print($0) }, onCompleted: { print($0) }) 등 축약 가능
+        -> sugar api: create
+     : .observeOn(MainScheduler.instance) : DispatchQueue.main.async {} 동일 기능. main Thread에서 작동
+        -> .observeOn(<#T##scheduler: ImmediateSchedulerType##ImmediateSchedulerType#>) : scheduler란, RXSwift에서 OperationQueue를 매핑하기 위한 것.
+        -> .observeOn : 바로 아래 코드의 Thread 변경하는 operator
+     
+        -> .subscribeOn : subscribeOn 코드가 어디에 있던지, 맨 처음의 observable 코드의 Thread 변경하는 operator
+        -> .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .default))
+        -> sugar api : operator
+        -> 추가적인 sugar api operator은 https://reactivex.io/documentation/operators.html 확인 가능
+     
+     - Observable 병합/합병
+     1. Observable.zip(<#T##source1: ObservableType##ObservableType#>, <#T##source2: ObservableType##ObservableType#>) { $0 + "\n" + $1 }
+     2. combineLast
+     4. merge
      */
     
     /* 구 코드 3 : URLSession 사용하지 않고 DispatchQueue 사용하여 직접 비동기 처리
@@ -175,7 +202,23 @@ class ViewController: UIViewController {
                                     break
                                 }
                             }
+                            .dispose()
 //        disposable.dispose() : disposable을 중지하는 함수
+        /* 여러개의 disposable 등록
+         1. DisposableBag 이용 : DisposableBag() 선언 -> DisposableBag.insert(disposable할 항목) : 따로 Disposable.dispose()하지 않아도 자동 종료 가능
+         2. Disposable.disposed(by: disposableBag)
+         */
+        
+        
+        /* 축약
+        let disposable = observable
+                            // DispatchQueue.main.async {} 동일 기능
+                            .observeOn(MainScheduler.instance)  // sugar api : operator
+                            .subscribe(onNext: { json in
+                                self.editView.text = json
+                                self.setVisibleWithAnimation(self.activityIndicator, false)
+                            })
+         */
     }
     
     
