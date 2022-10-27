@@ -8,11 +8,13 @@
 ├── Allen-Project
 │   ├── 1. SnapKit
 │   ├── 2. Chart
-│   └── 3. Custom TabBar
-├── 
-│   ├── 
-│   ├── 
-│   └── 
+│   ├── 3. Custom TabBar
+│   └── 4. Calendar
+│
+├── RXSwift
+│   ├── 곰튀김
+│       ├── MVCToMVVM
+│       └── season2
 └── 
 ``` 
 
@@ -22,6 +24,8 @@
 
 |주제                      |내용                                 |날짜 / 완료 여부            |
 |--------------------------------|-------------------------------|---------------------|
-|1. SnapKit  	|- Netflix 로그인UI 구현  <br/> - AutoLayout: SnapKit 사용          |22/10/06  ⭕️    |
-|         |           |           |
+|1. SnapKit  	|- Netflix 로그인UI 구현  <br/> - AutoLayout: SnapKit 사용          | ⭕️    |
+|2. Chart     |- Charts 라이브러리 사용           | ⭕️    |
+|3. Custom TabBar |-            | ⭕️    |
+|4. Calendar |- FSCalendar 라이브러리 사용      | ⭕️    |
 |          |||
