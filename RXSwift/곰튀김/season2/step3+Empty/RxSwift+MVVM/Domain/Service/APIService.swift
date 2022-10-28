@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxSwift
 
 let MenuUrl = "https://firebasestorage.googleapis.com/v0/b/rxswiftin4hours.appspot.com/o/fried_menus.json?alt=media&token=42d5cb7e-8ec4-48f9-bf39-3049e796c936"
 
@@ -26,5 +27,23 @@ class APIService {
             }
             onComplete(.success(data))
         }.resume()
+    }
+    
+    // 서버를 통해 받아온 데이터를 Observable<Data> 타입으로 변환
+    static func fetchAllMenusRx() -> Observable<Data> {
+        return Observable.create() { emitter in
+            
+            fetchAllMenus { result in
+                switch result {
+                case let .success(data):
+                    emitter.onNext(data)
+                    emitter.onCompleted()
+                case let .failure(error):
+                    emitter.onError(error)
+                }
+            }
+            
+            return Disposables.create()
+        }
     }
 }

@@ -8,6 +8,7 @@
 
 import Foundation
 
+// 서버에서 받아오는 데이터 타입
 struct MenuItem: Decodable {
     var name: String
     var price: Int
