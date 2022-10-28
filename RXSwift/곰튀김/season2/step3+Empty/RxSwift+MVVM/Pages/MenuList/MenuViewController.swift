@@ -44,13 +44,32 @@ class MenuViewController: UIViewController {
         
         viewModel.itemsCount
             .map { "\($0)" }
-            .observeOn(MainScheduler.instance)
-//            .subscribe(onNext: {
-//                self.itemCountLabel.text = $0
-//            }) 대신 아래 sugar로 표현.
-            // 들어온 데이터(String타입)를 그대로 label에 전달, reference count를 올리지 않고 label에 text를 전달해주기 때문에 순환참조 문제 X
-            .bind(to: itemCountLabel.rx.text)
+            .asDriver(onErrorJustReturn: "")
+            .drive(itemCountLabel.rx.text)
             .disposed(by: disposeBag)
+           
+        /*
+         .subscribe(onNext: {
+         self.itemCountLabel.text = $0
+         }) 대신 아래 sugar로 표현.
+         
+         .catchErrorJustReturn("")
+         .observeOn(MainScheduler.instance)
+         .bind(to: itemCountLabel.rx.text)
+         // label을 변경하는 것은 UI이기 때문에 Main Thread 처리
+         
+         -> RxCocoa 이용
+         -> 들어온 데이터(String타입)를 그대로 label에 전달
+         -> reference count를 올리지 않고 label에 text를 전달해주기 때문에 순환참조 문제 X
+         -> .catchErrorJustReturn(""): UI에서 데이터를 처리하다가 에러가 발생하면 Stream이 끊어져버림. 하지만 Stream은 한번 끊어지면 재활용이 불가능하기 때문에 기능이 멈춰버리게 됌. 때문에 UI는 에러가 발생해도 다음 상태로 넘어가야 함. 그래서 catchErrorJustReturn 이런걸 사용하고, error가 발생하면 기본 string인 "" 을 전달하고 넘어가~ 라는 뜻
+         
+         ********* 더 간단한 표현 ********************
+         .asDriver(onErrorJustReturn: "")
+         .drive(itemCountLabel.rx.text)
+         -> UI 처리에서 catchErrorJustReturn -> observeOn -> bind가 필수적이다보디 더 간단한 표현 생김
+         -> drive는 항상 Main Thread에서 돌아감.
+         */
+         
         
         viewModel.totalPrice
             .map { $0.currencyKR() }

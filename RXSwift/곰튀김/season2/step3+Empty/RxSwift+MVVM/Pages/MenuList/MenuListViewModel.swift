@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 class MenuListViewModel {
     
@@ -33,7 +34,7 @@ class MenuListViewModel {
      */
     
     
-    lazy var menuObservable = BehaviorSubject<[Menu]>(value: [])
+    lazy var menuObservable = BehaviorRelay<[Menu]>(value: [])
     
     // MenuList페이지 맨 밑에 있는 총 items 개수와 총 금액
     lazy var itemsCount = menuObservable.map {
@@ -46,10 +47,24 @@ class MenuListViewModel {
         $0.map { $0.price * $0.count }.reduce(0, +)
     }
     
-    /*
+    /* Subject / Relay
      Subject : Observable처럼 값을 받아올 수도 있지만, 외부에서 값 컨트롤도 가능
      
+     -> Observable은 create 할때부터 어떤 데이터를 전달할지 정해지기 때문에 외부에서 데이터를 주입하거나, 변경하는 것이 불가한 단방향.
+     -> Subject는 외부에서 값 컨트롤이 가능한 양방향.
+     
      - 정의) var totalPrice: PublishSubject<Int> = PublishSubject()
+     - 정의) var menuObservable = BehaviorSubject<[Menu]>(value: [])
+        -> BehaviorSubject는 create부터 기본값 가짐.
+     
+     
+     
+     Relay: Subject랑 종류부터 기능까지 모두 동일. 하지만 다른점은 Error 발생시 Stream이 끊어지지 않고 계속 이어짐.
+     
+     -> Relay는 에러가 발생하지 않으니, onNext 만! 있음.
+     -> Relay에서는 onNext를 .accept 로 표현
+     
+     
      */
     
     init() {
@@ -93,7 +108,7 @@ class MenuListViewModel {
              .take(1) : clear 버튼을 누르면 누를 때마다 새로운 stream이 계속 생성. 이 stream은 한번만 사용하고 끝낼것이라는 의미로 .take(1) 작성. 한번 사용 후 없어지기 때문에 disposed 할 필요가 없음.
              */
             .subscribe(onNext: {
-                self.menuObservable.onNext($0)
+                self.menuObservable.accept($0)
             })
     }
         
@@ -117,7 +132,7 @@ class MenuListViewModel {
             }
             .take(1)
             .subscribe(onNext: {
-                self.menuObservable.onNext($0)
+                self.menuObservable.accept($0)
             })
     }
 }
