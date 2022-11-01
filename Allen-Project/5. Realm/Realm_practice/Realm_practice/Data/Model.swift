@@ -6,14 +6,15 @@
 //
 
 import UIKit
+import RealmSwift
 
-class Todo {
+class Todo: Object {
     
-    var name: String = ""
-    var status: Status = .onGoing
-//    @Persisted(primaryKey: true) var _id: ObjectId
-//    @Persisted var name: String = ""
-//    @Persisted var status: Status = .onGoing
+//    var name: String = ""
+//    var status: Status = .onGoing
+    @Persisted(primaryKey: true) var _id: ObjectId
+    @Persisted var name: String = ""
+    @Persisted var status: Status = .onGoing
 //
 //    // struct가 아닌 class이기 때문에 편의생성자 자동 제공 X
     convenience init(name: String, status: Status) {
@@ -29,7 +30,8 @@ class Todo {
 }
 
 // toDo 진행 상황 enum
-enum Status {
+// Realm에서 enum 사용하기 위해 PersistableEnum 프로토콜 채택
+enum Status: String, PersistableEnum {
     case onGoing
     case completion
 }

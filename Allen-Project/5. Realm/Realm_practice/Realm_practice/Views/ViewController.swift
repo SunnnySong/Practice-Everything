@@ -6,17 +6,19 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ViewController: UIViewController {
     
-    var model = Todo()
-    
     // MARK: - Properties
+    var model = Todo()
 
     @IBOutlet weak var statusButton: UIButton!
     @IBOutlet weak var todoTextField: UITextField!
     @IBOutlet weak var enterButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    
+    let realm = try! Realm()
     
     // MARK: - Lifecycle
 
@@ -31,7 +33,19 @@ class ViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func enterBtnTapped(_ sender: Any) {
-        print("clicked")
+        
+        // Realm) realm -> 'Todo'의 object로 새로운 데이터 등록
+        try! realm.write({
+        realm.add(Todo(name: todoTextField.text ?? "nothing", status: .onGoing))
+        })
+        print(realm.objects(Todo.self))
+        
+        // 새로운 데이터 등록하면 tableView 다시 그리기
+        tableView.reloadData()
+        
+        // textfield 초기화 하기
+        todoTextField.text = ""
+        enterButton.isEnabled = false
     }
     
     
@@ -74,7 +88,10 @@ class ViewController: UIViewController {
     
     
     private func setupUI() {
+        todoTextField.delegate = self
         
+        // 처음 로드시 enter버튼 비활성화
+        enterButton.isEnabled = false
         // textField에 글자 입력시, clear 버튼 자동 생성
         todoTextField.clearButtonMode = .whileEditing
         
@@ -88,7 +105,8 @@ extension ViewController: UITableViewDataSource {
     
     // cell 갯수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Todo.rowData.count
+        
+        return realm.objects(Todo.self).count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -98,17 +116,25 @@ extension ViewController: UITableViewDataSource {
         cell.cellStatusButton.clipsToBounds = true
         cell.cellStatusButton.layer.cornerRadius = 30 / 2
         
-        let data = Todo.rowData[indexPath.row]
+        // Realm) 'Todo'의 object들을 모두 로드
+        let data = realm.objects(Todo.self)[indexPath.row]
         cell.cellTextField.text = data.name
         cell.cellStatusButton.backgroundColor = data.status.statusColor
         
         let onGoing = UIAction(title: "진행중") { _ in
             cell.cellStatusButton.backgroundColor = .red
-            data.status = .onGoing
+            
+            // Realm) object update
+            try! self.realm.write({
+                data.status = .onGoing
+            })
         }
         let completion = UIAction(title: "완료") { _ in
             cell.cellStatusButton.backgroundColor = .yellow
-            data.status = .completion
+            
+            try! self.realm.write({
+                data.status = .completion
+            })
         }
         let buttonMenu = UIMenu(children: [onGoing, completion])
         cell.cellStatusButton.menu = buttonMenu
@@ -117,6 +143,23 @@ extension ViewController: UITableViewDataSource {
         cell.selectionStyle = .none
         
         return cell
+    }
+    
+    // 참고: https://furang-note.tistory.com/30
+    // UITableViewCell Swipe Delete 구현 : canEditRowAt, commit
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if (editingStyle == .delete) {
+            let data = realm.objects(Todo.self)[indexPath.row]
+            try! realm.write({
+                realm.delete(data)
+            })
+        }
+        tableView.reloadData()
     }
 }
 
@@ -129,3 +172,28 @@ extension ViewController: UITableViewDelegate {
     }
 }
 
+
+extension ViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        /*
+         typealias NSRange = _NSRange
+
+         public struct _NSRange {
+           public var location: Int
+           public var length: Int
+         }
+         
+         -> textField에 글자를 한글자 입력하면 location 숫자가 올라가고, 한글자 삭제하면 length가 1이 된다. 이 상태에서 다시 글자를 입력하면 location숫자는 +1, length는 다시 0
+         */
+        if range.location == 0 && range.length != 0 {
+            // 글자를 입력하지 않으면 버튼 비활성화
+            self.enterButton.isEnabled = false
+        } else {
+            // 글자 입력시에만 enter버튼 활성화
+            self.enterButton.isEnabled = true
+        }
+        return true
+    }
+}
