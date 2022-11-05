@@ -113,9 +113,6 @@ extension ViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "\(TodoTableViewCell.self)", for: indexPath) as! TodoTableViewCell
         
-        cell.cellStatusButton.clipsToBounds = true
-        cell.cellStatusButton.layer.cornerRadius = 30 / 2
-        
         // Realm) 'Todo'의 object들을 모두 로드
         let data = realm.objects(Todo.self)[indexPath.row]
         cell.cellTextField.text = data.name
@@ -138,9 +135,6 @@ extension ViewController: UITableViewDataSource {
         }
         let buttonMenu = UIMenu(children: [onGoing, completion])
         cell.cellStatusButton.menu = buttonMenu
-        
-        // cell 선택시 회색 색깔 없애기
-        cell.selectionStyle = .none
         
         return cell
     }
@@ -169,6 +163,17 @@ extension ViewController: UITableViewDelegate {
     // 스토리보드에서 stackView나 cellStatusButton의 높이를 지정하려 하니 오류가 남. cell의 rowHeight를 바꿔줘야함
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 46
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        print("clicked")
+        let data = realm.objects(Todo.self)[indexPath.row]
+    
+        try! realm.write({
+            data.name = data.name
+        })
+
     }
 }
 
