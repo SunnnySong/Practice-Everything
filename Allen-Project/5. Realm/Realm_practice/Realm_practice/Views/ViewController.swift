@@ -155,10 +155,6 @@ extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 46
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("clicked")
-    }
 }
 
 
@@ -176,13 +172,22 @@ extension ViewController: UITextFieldDelegate {
          
          -> textField에 글자를 한글자 입력하면 location 숫자가 올라가고, 한글자 삭제하면 length가 1이 된다. 이 상태에서 다시 글자를 입력하면 location숫자는 +1, length는 다시 0
          */
-        if range.location == 0 && range.length != 0 {
-            // 글자를 입력하지 않으면 버튼 비활성화
-            self.enterButton.isEnabled = false
-        } else {
-            // 글자 입력시에만 enter버튼 활성화
-            self.enterButton.isEnabled = true
+        if textField == todoTextField {
+            if range.location == 0 && range.length != 0 {
+                // 글자를 입력하지 않으면 버튼 비활성화
+                self.enterButton.isEnabled = false
+            } else {
+                // 글자 입력시에만 enter버튼 활성화
+                self.enterButton.isEnabled = true
+            }
         }
+        return true
+    }
+    
+    
+    // 키보드 return 시 키보드 내려감.
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() // textfield 비활성화
         return true
     }
 }
