@@ -129,6 +129,11 @@ extension ViewController: UITableViewDataSource {
         let buttonMenu = UIMenu(children: [onGoing, completion])
         cell.cellStatusButton.menu = buttonMenu
         
+        cell.cellTextField.delegate = self
+        // func textFieldDidEndEditing(_ textField: UITextField)는 IndexPath.row가 없기 때문에 textField가 눌러진 해당 todo를 realmManager에다가 전달해줘야 하는데 어려움이 생김. 그래서 cellTextField.tag에 indexPath.row를 전달해주고 textFieldDidEndEditing 함수에서 IndexPath.row대신 사용하기로 함.
+        // cell의 첫번째 textfield.tag도 0이고, todoTextfield.tag 도 0 이기 때문에 + 1.
+        cell.cellTextField.tag = indexPath.row + 1
+        
         return cell
     }
     
@@ -155,6 +160,10 @@ extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 46
     }
+    
+    // 원래, 아래 코드를 구현하여 cell안의 textField를 클릭하면 해당 코드가 실행되면서 realmManager.updateTodo()를 실행시키려 했음. 하지만 아래 코드는 textField 외의 여백을 눌렀을 때 실행됌. 그러므로 cell안의 textField를 수정해도 아래 코드가 작동되지 않아 update 불가.
+    // 해결) func textFieldDidEndEditing(_ textField: UITextField) 이용
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {}
 }
 
 
@@ -184,6 +193,18 @@ extension ViewController: UITextFieldDelegate {
         return true
     }
     
+    // textField를 벗어나게 되면 실행되는 함수. textField를 벗어나면 자동으로 updateTodo()실행.
+    // 여기서 updateTodo()에 textField가 클릭된 todo를 지정해서 전달해줘야 하기 때문에, tag를 indexPath.row처럼 사용
+    // textField.tag == 0인 todoTextField를 제외하고 updateTodo() 실행
+    func textFieldDidEndEditing(_ textField: UITextField) {
+   
+        if textField.tag > 0 {
+            let index = textField.tag - 1
+            let data = realmManager.getTodos()[index]
+            guard let text = textField.text else { return }
+            realmManager.updateTodo(id: data.id, name: text)
+        }
+    }
     
     // 키보드 return 시 키보드 내려감.
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

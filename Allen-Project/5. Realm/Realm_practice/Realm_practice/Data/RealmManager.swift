@@ -48,13 +48,11 @@ class RealmManager {
         }
     }
     
-    func updateTodo(id: ObjectId, name: String, status: Status) {
+    func updateTodo(id: ObjectId, name: String) {
         do {
             let data = realm.objects(Todo.self).filter(NSPredicate(format: "id == %@", id))
-            
             try realm.write({
                 data[0].name = name
-                data[0].status = status
             })
         } catch {
             print("Error: updating task to Realm: \(error)")
