@@ -17,8 +17,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var todoTextField: UITextField!
     @IBOutlet weak var enterButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    
-    let realm = try! Realm()
+ 
+    let realmManager = RealmManager()
     
     // MARK: - Lifecycle
 
@@ -34,11 +34,8 @@ class ViewController: UIViewController {
     
     @IBAction func enterBtnTapped(_ sender: Any) {
         
-        // Realm) realm -> 'Todo'의 object로 새로운 데이터 등록
-        try! realm.write({
-        realm.add(Todo(name: todoTextField.text ?? "nothing", status: .onGoing))
-        })
-        print(realm.objects(Todo.self))
+        guard let text = todoTextField.text else { return }
+        realmManager.addTodo(name: text)
         
         // 새로운 데이터 등록하면 tableView 다시 그리기
         tableView.reloadData()
@@ -106,7 +103,7 @@ extension ViewController: UITableViewDataSource {
     // cell 갯수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return realm.objects(Todo.self).count
+        return realmManager.getTodos().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -114,24 +111,20 @@ extension ViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "\(TodoTableViewCell.self)", for: indexPath) as! TodoTableViewCell
         
         // Realm) 'Todo'의 object들을 모두 로드
-        let data = realm.objects(Todo.self)[indexPath.row]
+        let data = realmManager.getTodos()[indexPath.row]
         cell.cellTextField.text = data.name
         cell.cellStatusButton.backgroundColor = data.status.statusColor
         
         let onGoing = UIAction(title: "진행중") { _ in
             cell.cellStatusButton.backgroundColor = .red
-            
             // Realm) object update
-            try! self.realm.write({
-                data.status = .onGoing
-            })
+            self.realmManager.switchStatus(status: .onGoing, data: data)
+            tableView.reloadData()
         }
         let completion = UIAction(title: "완료") { _ in
             cell.cellStatusButton.backgroundColor = .yellow
-            
-            try! self.realm.write({
-                data.status = .completion
-            })
+            self.realmManager.switchStatus(status: .completion, data: data)
+            tableView.reloadData()
         }
         let buttonMenu = UIMenu(children: [onGoing, completion])
         cell.cellStatusButton.menu = buttonMenu
@@ -148,10 +141,8 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if (editingStyle == .delete) {
-            let data = realm.objects(Todo.self)[indexPath.row]
-            try! realm.write({
-                realm.delete(data)
-            })
+            let data = realmManager.getTodos()[indexPath.row].id
+            realmManager.deleteTodo(id: data)
         }
         tableView.reloadData()
     }
@@ -166,14 +157,7 @@ extension ViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         print("clicked")
-        let data = realm.objects(Todo.self)[indexPath.row]
-    
-        try! realm.write({
-            data.name = data.name
-        })
-
     }
 }
 

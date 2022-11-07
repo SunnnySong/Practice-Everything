@@ -9,24 +9,18 @@ import UIKit
 import RealmSwift
 
 class Todo: Object {
-    
-//    var name: String = ""
-//    var status: Status = .onGoing
-    @Persisted(primaryKey: true) var _id: ObjectId
+
+    // RealmManager로 realm 과 관련된 활동들을 다 분리 -> delete, update를 할 때, id 를 사용하기 때문에 _id 대신 id 
+    @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var name: String = ""
     @Persisted var status: Status = .onGoing
-//
-//    // struct가 아닌 class이기 때문에 편의생성자 자동 제공 X
+    
+    // struct가 아닌 class이기 때문에 편의생성자 자동 제공 X
     convenience init(name: String, status: Status) {
         self.init()
         self.name = name
         self.status = status
     }
-    
-    static var rowData: [Todo] = [
-        Todo(name: "빨래하기", status: .onGoing),
-        Todo(name: "청소하기", status: .completion)
-    ]
 }
 
 // toDo 진행 상황 enum
