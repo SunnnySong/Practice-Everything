@@ -9,6 +9,7 @@ import UIKit
 
 final class TabBarViewController: UITabBarController {
     
+    // 버튼에 이미지,텍스트 세로로 정렬하기
     lazy var middleButton: UIButton = {
         var config = UIButton.Configuration.filled()
         config.baseBackgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
