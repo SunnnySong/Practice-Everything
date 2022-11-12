@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "A29B51F9-9C4B-4ED8-BC27-A0255A604C81"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "32A23D07-B4B4-4D64-90EA-964530E136C4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CompositionalLayouts_practice/Views/FirstSection.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "init(frame:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A3608F93-233C-4D00-9A1A-0D1EF365DBE6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CompositionalLayouts_practice/Views/CollectionView/Header.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "prepareForReuse()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A3608F93-233C-4D00-9A1A-0D1EF365DBE6 - e382c56e2a2bc1e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CompositionalLayouts_practice.Header.__allocating_init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;CompositionalLayouts_practice.Header&gt;"
+                  moduleName = "CompositionalLayouts_practice"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/songsunjin/Desktop/Swift/SwiftPractice-Everything/Allen-Project/6.%20Compositonal%20Layouts/CompositionalLayouts_practice/CompositionalLayouts_practice/Views/CollectionView/Header.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  uuid = "A3608F93-233C-4D00-9A1A-0D1EF365DBE6 - 1b039959c86f7896"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CompositionalLayouts_practice.Header.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;CompositionalLayouts_practice.Header&gt;"
+                  moduleName = "CompositionalLayouts_practice"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/songsunjin/Desktop/Swift/SwiftPractice-Everything/Allen-Project/6.%20Compositonal%20Layouts/CompositionalLayouts_practice/CompositionalLayouts_practice/Views/CollectionView/Header.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "84">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

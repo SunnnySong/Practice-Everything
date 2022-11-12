@@ -16,19 +16,20 @@ import SnapKit
 class FirstSection: UIView {
     
     // UIButton) image와 title 세로 정렬
-    let button1 = firstSectionBtn(title: "최신 음악", imageName: "music.mic.circle")
+    let button1 = FirstSectionBtn(title: "최신 음악", imageName: "music.mic.circle")
     
-    let button2 = firstSectionBtn(title: "차트", imageName: "chart.line.uptrend.xyaxis")
+    let button2 = FirstSectionBtn(title: "차트", imageName: "chart.line.uptrend.xyaxis")
     
-    let button3: firstSectionBtn = {
-        let btn = firstSectionBtn(title: "분위기 및 장르", imageName: "face.smiling")
+    let button3: FirstSectionBtn = {
+        let btn = FirstSectionBtn(title: "분위기 및 장르", imageName: "face.smiling")
         btn.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         return btn
     }()
     
     lazy var stackView: UIStackView = {
         let sv = UIStackView(arrangedSubviews: [button1, button2, button3])
-        sv.spacing = 15
+        // error : layout을 layoutSubviews()에서 잡기 때문에, 여기서 spacing을 잡으면 에러 발생. 
+//        sv.spacing = 15
         sv.axis = .horizontal
         sv.distribution = .fillEqually
         sv.alignment = .fill
@@ -45,12 +46,21 @@ class FirstSection: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        stackView.frame = bounds
+        stackView.spacing = 15
+    }
+    
     func setupHeader() {
         self.addSubview(stackView)
         
-        // stackView autolayout
-        stackView.snp.makeConstraints { make in
-            make.left.right.top.equalTo(self)
-        }
+        // init()에서 layout을 잡아줄 수도 있지만, layoutSubviews()에서 .frame = bounds 로 잡아줘도 가능.
+        // 단, .frame = bounds를 init()에서 한다면 작동X
+//         stackView autolayout
+//        stackView.snp.makeConstraints { make in
+//            make.left.right.top.equalTo(self)
+//        }
     }
 }
