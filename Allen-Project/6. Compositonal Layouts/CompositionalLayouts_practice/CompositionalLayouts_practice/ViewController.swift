@@ -81,7 +81,7 @@ extension ViewController: UICollectionViewDataSource {
         if section == 0 {
             return 5
         } else if section == 1{
-            return 8
+            return 12
         } else {
             return 10
         }

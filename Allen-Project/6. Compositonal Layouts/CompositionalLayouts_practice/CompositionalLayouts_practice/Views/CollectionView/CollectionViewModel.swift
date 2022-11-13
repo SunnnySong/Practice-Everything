@@ -36,17 +36,18 @@ struct CollectionViewModel {
             case 1:
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                item.contentInsets = .init(top: 0, leading: 0, bottom: 10, trailing: 17)
                 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / 2), heightDimension: .fractionalHeight(1))
-                let group1 = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-
-                group1.contentInsets = .init(top: 0, leading: 0, bottom: 14, trailing: 15)
-
-                let totalGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1 / 8))
-                let group = NSCollectionLayoutGroup.vertical(layoutSize: totalGroupSize, subitems: [group1])
+                // 차트 형식으로 만들으려 하면, groupSize의 heightDimension을 .fractionalHeight로 설정X
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.87), heightDimension: .estimated(70))
+                // ViewController에서 이 section의 Item 갯수 12개 설정.
+                // repeatingSubitem을 count갯수만큼 반복해서 vertical한 group을 생성. 
+                let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, repeatingSubitem: item, count: 4)
                 
                 let section = NSCollectionLayoutSection(group: group)
-//                section.orthogonalScrollingBehavior = .groupPaging
+                section.orthogonalScrollingBehavior = .groupPaging
+                section.contentInsets = .init(top: 0, leading: 0, bottom: 10, trailing: 0)
+                
                 let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50))
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
                 section.boundarySupplementaryItems = [header]
