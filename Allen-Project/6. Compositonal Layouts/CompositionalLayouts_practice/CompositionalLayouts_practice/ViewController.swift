@@ -10,6 +10,7 @@ import SnapKit
 
 /*
  - UICollectionView 참조: https://lsh424.tistory.com/52
+ youtubeMusic 메인 화면 clone coding
  */
 class ViewController: UIViewController {
     
@@ -31,6 +32,8 @@ class ViewController: UIViewController {
         // cell 등록
         cv.register(CollectionViewCell1.self, forCellWithReuseIdentifier: "\(CollectionViewCell1.self)")
         cv.register(CollectionViewCell2.self, forCellWithReuseIdentifier: "\(CollectionViewCell2.self)")
+        cv.register(CollectionViewCell3.self, forCellWithReuseIdentifier: "\(CollectionViewCell3.self)")
+        cv.register(CollectionViewCell4.self, forCellWithReuseIdentifier: "\(CollectionViewCell4.self)")
         // Header 등록
         cv.register(Header.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "\(Header.self)")
         return cv
@@ -82,8 +85,12 @@ extension ViewController: UICollectionViewDataSource {
             return 5
         } else if section == 1{
             return 12
+        } else if section == 2 {
+            return 12
+        } else if section == 3 {
+            return 7
         } else {
-            return 10
+            return 5
         }
     }
     
@@ -91,13 +98,17 @@ extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell1 = collectionView.dequeueReusableCell(withReuseIdentifier: "\(CollectionViewCell1.self)", for: indexPath) as! CollectionViewCell1
         let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: "\(CollectionViewCell2.self)", for: indexPath) as! CollectionViewCell2
+        let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: "\(CollectionViewCell3.self)", for: indexPath) as! CollectionViewCell3
+        let cell4 = collectionView.dequeueReusableCell(withReuseIdentifier: "\(CollectionViewCell4.self)", for: indexPath) as! CollectionViewCell4
         
         if indexPath.section == 0 {
             return cell1
         } else if indexPath.section == 1 {
             return cell2
+        } else if indexPath.section == 2 {
+            return cell3
         } else {
-            return cell1
+            return cell4
         }
     }
     
