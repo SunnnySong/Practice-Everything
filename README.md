@@ -5,12 +5,14 @@
 
 ## 파일 구조
 ```bash
-├── Allen-Project
+├── Study-Everthing
 │   ├── 1. SnapKit
 │   ├── 2. Chart
 │   ├── 3. Custom TabBar
 │   ├── 4. Calendar
-│   └── 5. Realm
+│   ├── 5. Realm
+│   └── 6. Compositional Layouts
+│
 │
 ├── RXSwift
 │   ├── 곰튀김
