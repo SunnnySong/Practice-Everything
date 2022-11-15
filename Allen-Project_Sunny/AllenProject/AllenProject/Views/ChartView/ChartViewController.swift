@@ -1,15 +1,17 @@
 //
-//  ViewController.swift
+//  ChartViewController.swift
 //  AllenProject
 //
-//  Created by 송선진 on 2022/11/14.
+//  Created by 송선진 on 2022/11/15.
 //
 
 import UIKit
 import Charts
 import SnapKit
 
-final class ViewController: UIViewController {
+final class ChartViewController: UIViewController {
+    
+    let viewModel = ChartViewModel()
     
     private let chartView: BarChartView = {
         let chartView = BarChartView()
@@ -21,13 +23,14 @@ final class ViewController: UIViewController {
         
         return chartView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupChartView()
+        setupChartData()
     }
-
+    
     private func setupChartView() {
         view.addSubview(chartView)
         chartView.delegate = self
@@ -38,8 +41,12 @@ final class ViewController: UIViewController {
             make.height.equalTo(300)
         }
     }
+    
+    private func setupChartData() {
+        chartView.data = viewModel.setBarChartData()
+    }
+    
 }
 
-extension ViewController: ChartViewDelegate {
+extension ChartViewController: ChartViewDelegate {
 }
-

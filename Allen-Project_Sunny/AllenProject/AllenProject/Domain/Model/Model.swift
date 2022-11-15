@@ -9,9 +9,9 @@ import Foundation
 
 // 서버에서 받아오는 데이터 타입.. 이지만 일단 사용하기 쉬운 데이터 타입으로 임의 설정
 struct LottoItem {
-    var buyMonth: Int
-    var buyAmount: Int
-    var winAmount: Int
+    var buyMonth: Double    // BarChartDataEntry에 넣기 편리하도록 Double 타입 선언
+    var buyAmount: Double
+    var winAmount: Double
     
     static var rowData: [LottoItem] = [
         LottoItem(buyMonth: 1, buyAmount: 5000, winAmount: 0),

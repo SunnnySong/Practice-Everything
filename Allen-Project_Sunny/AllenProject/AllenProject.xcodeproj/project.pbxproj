@@ -8,9 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		37E293CDF889D332DD859C7B /* Pods_AllenProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ACBDE1D8DC359A479EFF239 /* Pods_AllenProject.framework */; };
+		4F690D502923664D006FAD36 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D4F2923664D006FAD36 /* DateViewController.swift */; };
+		4F690D522923665C006FAD36 /* LottoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D512923665C006FAD36 /* LottoController.swift */; };
+		4F690D5429236668006FAD36 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D5329236668006FAD36 /* ChartViewController.swift */; };
+		4F690D562923668D006FAD36 /* RandomMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D552923668D006FAD36 /* RandomMoneyViewController.swift */; };
+		4F690D5829237C7D006FAD36 /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D5729237C7D006FAD36 /* ChartViewModel.swift */; };
 		4F8711F1292280AC00BE353D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8711F0292280AC00BE353D /* AppDelegate.swift */; };
 		4F8711F3292280AC00BE353D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8711F2292280AC00BE353D /* SceneDelegate.swift */; };
-		4F8711F5292280AC00BE353D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8711F4292280AC00BE353D /* ViewController.swift */; };
+		4F8711F5292280AC00BE353D /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8711F4292280AC00BE353D /* HomeController.swift */; };
 		4F8711F8292280AC00BE353D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F8711F6292280AC00BE353D /* Main.storyboard */; };
 		4F8711FA292280AC00BE353D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F8711F9292280AC00BE353D /* Assets.xcassets */; };
 		4F8711FD292280AC00BE353D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F8711FB292280AC00BE353D /* LaunchScreen.storyboard */; };
@@ -20,10 +25,15 @@
 
 /* Begin PBXFileReference section */
 		1391733C0EEED7C69949453A /* Pods-AllenProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllenProject.debug.xcconfig"; path = "Target Support Files/Pods-AllenProject/Pods-AllenProject.debug.xcconfig"; sourceTree = "<group>"; };
+		4F690D4F2923664D006FAD36 /* DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
+		4F690D512923665C006FAD36 /* LottoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoController.swift; sourceTree = "<group>"; };
+		4F690D5329236668006FAD36 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
+		4F690D552923668D006FAD36 /* RandomMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomMoneyViewController.swift; sourceTree = "<group>"; };
+		4F690D5729237C7D006FAD36 /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
 		4F8711ED292280AC00BE353D /* AllenProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AllenProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F8711F0292280AC00BE353D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F8711F2292280AC00BE353D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4F8711F4292280AC00BE353D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4F8711F4292280AC00BE353D /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		4F8711F7292280AC00BE353D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4F8711F9292280AC00BE353D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F8711FC292280AC00BE353D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -54,6 +64,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4F690D5929237C80006FAD36 /* ChartView */ = {
+			isa = PBXGroup;
+			children = (
+				4F690D5729237C7D006FAD36 /* ChartViewModel.swift */,
+				4F690D5329236668006FAD36 /* ChartViewController.swift */,
+			);
+			path = ChartView;
+			sourceTree = "<group>";
+		};
 		4F8711E4292280AC00BE353D = {
 			isa = PBXGroup;
 			children = (
@@ -81,22 +100,18 @@
 				4F871206292284E500BE353D /* Domain */,
 				4F871205292282E500BE353D /* Views */,
 				4F87120B29228D3E00BE353D /* Extensions */,
-				4F871204292282DD00BE353D /* Controllers */,
 			);
 			path = AllenProject;
-			sourceTree = "<group>";
-		};
-		4F871204292282DD00BE353D /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				4F8711F4292280AC00BE353D /* ViewController.swift */,
-			);
-			path = Controllers;
 			sourceTree = "<group>";
 		};
 		4F871205292282E500BE353D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4F690D5929237C80006FAD36 /* ChartView */,
+				4F8711F4292280AC00BE353D /* HomeController.swift */,
+				4F690D4F2923664D006FAD36 /* DateViewController.swift */,
+				4F690D512923665C006FAD36 /* LottoController.swift */,
+				4F690D552923668D006FAD36 /* RandomMoneyViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -276,11 +291,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F8711F5292280AC00BE353D /* ViewController.swift in Sources */,
+				4F8711F5292280AC00BE353D /* HomeController.swift in Sources */,
 				4F87120D29228D6300BE353D /* UIColor.swift in Sources */,
+				4F690D522923665C006FAD36 /* LottoController.swift in Sources */,
 				4F8711F1292280AC00BE353D /* AppDelegate.swift in Sources */,
 				4F87120F29228FA300BE353D /* Model.swift in Sources */,
+				4F690D5829237C7D006FAD36 /* ChartViewModel.swift in Sources */,
+				4F690D5429236668006FAD36 /* ChartViewController.swift in Sources */,
+				4F690D502923664D006FAD36 /* DateViewController.swift in Sources */,
 				4F8711F3292280AC00BE353D /* SceneDelegate.swift in Sources */,
+				4F690D562923668D006FAD36 /* RandomMoneyViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
