@@ -381,7 +381,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
             
             // bar 별 모서리 라운드 처리
 //            context.fill(barRect)
-            let bezierPath = UIBezierPath(roundedRect: barRect, cornerRadius: 7)
+            let bezierPath = UIBezierPath(roundedRect: barRect, cornerRadius: 6)
             context.addPath(bezierPath.cgPath)
             context.drawPath(using: .fill)
             
@@ -750,7 +750,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 
                 // Highlight 바 모서리 라운드 처리
 //                context.fill(barRect)
-                let bezierPath = UIBezierPath(roundedRect: barRect, cornerRadius: 7)
+                let bezierPath = UIBezierPath(roundedRect: barRect, cornerRadius: 6)
                 context.addPath(bezierPath.cgPath)
                 context.drawPath(using: .fill)
             }

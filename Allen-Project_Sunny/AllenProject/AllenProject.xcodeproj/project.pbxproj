@@ -13,6 +13,8 @@
 		4F690D5429236668006FAD36 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D5329236668006FAD36 /* ChartViewController.swift */; };
 		4F690D562923668D006FAD36 /* RandomMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D552923668D006FAD36 /* RandomMoneyViewController.swift */; };
 		4F690D5829237C7D006FAD36 /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D5729237C7D006FAD36 /* ChartViewModel.swift */; };
+		4F690D5C2923DA86006FAD36 /* ChartMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D5B2923DA86006FAD36 /* ChartMarkerView.swift */; };
+		4F690D5F2923E850006FAD36 /* MarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F690D5E2923E850006FAD36 /* MarkerView.xib */; };
 		4F8711F1292280AC00BE353D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8711F0292280AC00BE353D /* AppDelegate.swift */; };
 		4F8711F3292280AC00BE353D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8711F2292280AC00BE353D /* SceneDelegate.swift */; };
 		4F8711F5292280AC00BE353D /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8711F4292280AC00BE353D /* HomeController.swift */; };
@@ -30,6 +32,8 @@
 		4F690D5329236668006FAD36 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		4F690D552923668D006FAD36 /* RandomMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomMoneyViewController.swift; sourceTree = "<group>"; };
 		4F690D5729237C7D006FAD36 /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
+		4F690D5B2923DA86006FAD36 /* ChartMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartMarkerView.swift; sourceTree = "<group>"; };
+		4F690D5E2923E850006FAD36 /* MarkerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkerView.xib; sourceTree = "<group>"; };
 		4F8711ED292280AC00BE353D /* AllenProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AllenProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F8711F0292280AC00BE353D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F8711F2292280AC00BE353D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,10 +71,20 @@
 		4F690D5929237C80006FAD36 /* ChartView */ = {
 			isa = PBXGroup;
 			children = (
+				4F690D5D2923E800006FAD36 /* MarkerView */,
 				4F690D5729237C7D006FAD36 /* ChartViewModel.swift */,
 				4F690D5329236668006FAD36 /* ChartViewController.swift */,
 			);
 			path = ChartView;
+			sourceTree = "<group>";
+		};
+		4F690D5D2923E800006FAD36 /* MarkerView */ = {
+			isa = PBXGroup;
+			children = (
+				4F690D5B2923DA86006FAD36 /* ChartMarkerView.swift */,
+				4F690D5E2923E850006FAD36 /* MarkerView.xib */,
+			);
+			path = MarkerView;
 			sourceTree = "<group>";
 		};
 		4F8711E4292280AC00BE353D = {
@@ -236,6 +250,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F690D5F2923E850006FAD36 /* MarkerView.xib in Resources */,
 				4F8711FD292280AC00BE353D /* LaunchScreen.storyboard in Resources */,
 				4F8711FA292280AC00BE353D /* Assets.xcassets in Resources */,
 				4F8711F8292280AC00BE353D /* Main.storyboard in Resources */,
@@ -297,6 +312,7 @@
 				4F8711F1292280AC00BE353D /* AppDelegate.swift in Sources */,
 				4F87120F29228FA300BE353D /* Model.swift in Sources */,
 				4F690D5829237C7D006FAD36 /* ChartViewModel.swift in Sources */,
+				4F690D5C2923DA86006FAD36 /* ChartMarkerView.swift in Sources */,
 				4F690D5429236668006FAD36 /* ChartViewController.swift in Sources */,
 				4F690D502923664D006FAD36 /* DateViewController.swift in Sources */,
 				4F8711F3292280AC00BE353D /* SceneDelegate.swift in Sources */,

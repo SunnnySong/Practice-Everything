@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChartMarkerView" customModule="AllenProject" customModuleProvider="target">
+            <connections>
+                <outlet property="baseView" destination="y91-Qg-sNU" id="Jyi-8X-TAH"/>
+                <outlet property="moneyLabel" destination="Dg2-br-MWV" id="JIQ-Da-eHc"/>
+                <outlet property="monthLabel" destination="wZE-dV-cKE" id="IIf-mB-Sbh"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="101" height="54"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y91-Qg-sNU">
+                    <rect key="frame" x="0.0" y="0.0" width="101" height="54"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 월" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wZE-dV-cKE">
+                            <rect key="frame" x="0.0" y="3.0000000000000009" width="101" height="13.333333333333336"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" text="구매 금액 - 당첨 금액 =" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aFN-BT-YYg">
+                            <rect key="frame" x="0.0" y="21.333333333333332" width="101" height="9"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="10000 원" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dg2-br-MWV">
+                            <rect key="frame" x="0.0" y="35.333333333333336" width="101" height="15.666666666666664"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="wZE-dV-cKE" firstAttribute="top" secondItem="y91-Qg-sNU" secondAttribute="top" constant="3" id="09w-RN-nGz"/>
+                        <constraint firstAttribute="bottom" secondItem="Dg2-br-MWV" secondAttribute="bottom" constant="3" id="AgM-4k-6Fy"/>
+                        <constraint firstAttribute="trailing" secondItem="wZE-dV-cKE" secondAttribute="trailing" id="HUe-s2-Ktj"/>
+                        <constraint firstAttribute="trailing" secondItem="Dg2-br-MWV" secondAttribute="trailing" id="ICd-AH-7p9"/>
+                        <constraint firstItem="aFN-BT-YYg" firstAttribute="top" secondItem="wZE-dV-cKE" secondAttribute="bottom" constant="5" id="J2z-f6-yQD"/>
+                        <constraint firstAttribute="trailing" secondItem="aFN-BT-YYg" secondAttribute="trailing" id="hWb-DE-wXX"/>
+                        <constraint firstItem="wZE-dV-cKE" firstAttribute="leading" secondItem="y91-Qg-sNU" secondAttribute="leading" id="iNN-G3-fBM"/>
+                        <constraint firstItem="Dg2-br-MWV" firstAttribute="leading" secondItem="y91-Qg-sNU" secondAttribute="leading" id="im6-2e-ESC"/>
+                        <constraint firstItem="aFN-BT-YYg" firstAttribute="leading" secondItem="y91-Qg-sNU" secondAttribute="leading" id="lf2-4v-BMq"/>
+                        <constraint firstItem="Dg2-br-MWV" firstAttribute="top" secondItem="aFN-BT-YYg" secondAttribute="bottom" constant="5" id="reb-QP-67l"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="y91-Qg-sNU" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Rjc-rZ-jQf"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="y91-Qg-sNU" secondAttribute="bottom" id="eb6-5M-aEl"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="y91-Qg-sNU" secondAttribute="trailing" id="prk-cf-kZy"/>
+                <constraint firstItem="y91-Qg-sNU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="spT-gc-ijP"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="106.92307692307692" y="-90.284360189573462"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

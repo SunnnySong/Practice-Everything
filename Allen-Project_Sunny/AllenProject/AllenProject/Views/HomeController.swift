@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 final class HomeController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
