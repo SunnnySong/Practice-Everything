@@ -9,6 +9,8 @@ import UIKit
 import Charts
 import SnapKit
 
+// bar 모서리 라운드 처리 : https://wlxo0401.oopy.io/8082412e-80e9-4f79-b2a1-164a9036fc6f
+
 final class ChartViewController: UIViewController {
     
     let viewModel = ChartViewModel()
@@ -20,6 +22,11 @@ final class ChartViewController: UIViewController {
         chartView.backgroundColor = UIColor(hex: "2B2C35")
         chartView.layer.cornerRadius = 20
         chartView.clipsToBounds = true
+        
+        // chart 더블클릭시 확대되는 것 false
+        chartView.setScaleEnabled(false)
+        // chart bar 별 의미 적힌 동그라미 false
+        chartView.legend.enabled = false
         
         return chartView
     }()
@@ -40,6 +47,21 @@ final class ChartViewController: UIViewController {
             make.left.right.equalToSuperview().inset(20)
             make.height.equalTo(300)
         }
+        
+        // 오른쪽, 왼쪽 금액 표시 비활성화
+        chartView.rightAxis.enabled = false
+        chartView.leftAxis.enabled = false
+        
+        // 1~12 월 표시
+        chartView.xAxis.labelTextColor = .white
+        chartView.xAxis.labelPosition = .bottom
+        chartView.xAxis.labelFont = UIFont.systemFont(ofSize: 11, weight: .bold)
+        // xAsxis의 값을 index로 표현
+        chartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: viewModel.monthLabel)
+        chartView.xAxis.setLabelCount(12, force: false)
+        // bar 별 xAxis 세로선 삭제하기
+        chartView.xAxis.drawGridLinesEnabled = false
+        
     }
     
     private func setupChartData() {
@@ -49,4 +71,9 @@ final class ChartViewController: UIViewController {
 }
 
 extension ChartViewController: ChartViewDelegate {
+    
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        
+        print(entry)
+    }
 }

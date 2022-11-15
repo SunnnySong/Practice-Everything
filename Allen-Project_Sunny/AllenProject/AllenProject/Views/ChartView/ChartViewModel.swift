@@ -10,12 +10,14 @@ import Charts
 
 class ChartViewModel {
     
+    var monthLabel = ["","1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
+    
     // 1. BarChartDataEntry 변환하기.
     // BarChartDataEntry의 x, y는 모두 Double 타입
     private func setBarChartDataEntry(completion: ([BarChartDataSet]) -> [BarChartDataSet]) -> [BarChartDataSet] {
         let rowData = LottoItem.rowData
         // rowData를 BarChartDataEntry(x:,y:)로 변환
-        let dataEntry = rowData.map { BarChartDataEntry(x: $0.buyMonth, y: ($0.buyAmount - $0.winAmount))
+        let dataEntry = rowData.map { BarChartDataEntry(x: $0.buyMonth, y: $0.winAmount - $0.buyAmount)
         }
         // BarChartDataEntry를 BarChartDataSet으로 변환하기 위해 completion으로 넘김.
         let dataSet = completion(setBarChartDataSet(dataEntry: dataEntry, completion: {$0}))
