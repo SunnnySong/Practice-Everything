@@ -19,6 +19,12 @@ final class ChartViewController: UIViewController {
     private let chartView: BarChartView = {
         let chartView = BarChartView()
         
+        // chart와 BarChartView 간 bottom 간격 조정
+        chartView.extraBottomOffset = 20
+        chartView.extraLeftOffset = 20
+        chartView.extraRightOffset = 20
+        chartView.extraTopOffset = 40
+        
         // Hex color 사용할 수 있도록 UIColor에 extension함
         chartView.backgroundColor = UIColor(hex: "2B2C35")
         chartView.layer.cornerRadius = 20
@@ -26,6 +32,7 @@ final class ChartViewController: UIViewController {
         
         // chart 더블클릭시 확대되는 것 false
         chartView.setScaleEnabled(false)
+//        chartView.zoom(scaleX: 0.5, scaleY: 1, x: 0, y: 0)
         // chart bar 별 의미 적힌 동그라미 false
         chartView.legend.enabled = false
         return chartView
@@ -74,7 +81,9 @@ final class ChartViewController: UIViewController {
     }
     
     private func setupChartMarkerView() {
+        // custom한 markerView의 chart를 해당 chartView로 설정
         chartMarkerView.chartView = chartView
+        // chart의 marker을 custom한 markerView로 설정
         chartView.marker = chartMarkerView
     }
     
@@ -85,11 +94,16 @@ extension ChartViewController: ChartViewDelegate {
     // bar 클릭시 실행되는 함수
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         
-        print(entry)
-        chartMarkerView.monthLabel.text = "\(Int(entry.x)) 월"
-        chartMarkerView.moneyLabel.text = "\(Int(entry.y)) 원"
+        let barHeight = self.chartView.getBarBounds(entry: entry as! BarChartDataEntry).height
+        print(barHeight)
+        if highlight.y > 0 {
+            chartMarkerView.offset = .init(x: -(chartMarkerView.baseView.frame.width / 2), y: -(barHeight * 2 + 15))
+            print(chartMarkerView.offset.y)
+        } else {
+            chartMarkerView.offset = .init(x: -(chartMarkerView.baseView.frame.width / 2), y: (barHeight + 10))
+        }
         
-        print(chartMarkerView.offset)
+//        print(entry)
         if entry.x == 12.0 {
 //            chartMarkerView.offset = .init(x: -(baseView.frame.width / 2 + 40), y: -(baseView.frame.height + 3))
         }

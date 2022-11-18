@@ -14,6 +14,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // AppDelegate에서 UINavigationBarAppearance, UITabBarAppearance 설정
+//        if #available(iOS 13.0, *) {
+//            let tabBarAppearance = UITabBarAppearance()
+//            tabBarAppearance.configureWithDefaultBackground()
+//            tabBarAppearance.backgroundColor = UIColor(hex: "202632")
+//            UITabBar.appearance().standardAppearance = tabBarAppearance
+//
+//            UITabBar.appearance().tintColor = .white
+//
+//            if #available(iOS 15.0, *) {
+//                UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+//            }
+//        }
+        
         return true
     }
 

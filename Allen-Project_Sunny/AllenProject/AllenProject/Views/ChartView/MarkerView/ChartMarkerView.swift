@@ -9,8 +9,10 @@ import UIKit
 import Charts
 import SnapKit
 
+// MarkerView가 아니라 MarkerImage로 구현 가능
 class ChartMarkerView: MarkerView {
    
+    // TODO: MarkerView design 바꾸기, marker의 높이에 따라 chartView extraoffset 설정해주기
     @IBOutlet weak var baseView: UIView!
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var moneyLabel: UILabel!
@@ -29,14 +31,15 @@ class ChartMarkerView: MarkerView {
         
         // Xib 파일과 연결하기
         Bundle.main.loadNibNamed("MarkerView", owner: self, options: nil)
-        // contentView 위에 markerBoard 위에 label 올림
         self.addSubview(baseView)
         
         baseView.layer.cornerRadius = 5
         baseView.clipsToBounds = true
+    }
+    
+    override func refreshContent(entry: ChartDataEntry, highlight: Highlight) {
         
-        // TODO: offset 맞춰야함.
-        self.offset = .init(x: -(baseView.frame.width / 2), y: -(baseView.frame.height + 3))
-        
+        monthLabel.text = "\(Int(entry.x)) 월"
+        moneyLabel.text = "\(Int(entry.y)) 원"
     }
 }
