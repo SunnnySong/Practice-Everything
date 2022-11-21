@@ -14,6 +14,12 @@ class CustomTabBar: UITabBar {
     
     private var shapeLayer: CALayer?
     
+    let middleView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(hex: "5294F9")
+        return view
+    }()
+    
     let middleButton: UIButton = {
         var config = UIButton.Configuration.filled()
         config.baseBackgroundColor = UIColor(hex: "5294F9")
@@ -24,8 +30,11 @@ class CustomTabBar: UITabBar {
         config.titleAlignment = .center
         
         let image = UIImage(systemName: "qrcode")
+        // image 사이즈 조정
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 20)
+        config.preferredSymbolConfigurationForImage = imageConfig
         config.image = image
-        config.imagePadding = 10
+        config.imagePadding = 5
         config.imagePlacement = .top
         
         return UIButton(configuration: config)
@@ -35,6 +44,7 @@ class CustomTabBar: UITabBar {
         super.init(frame: frame)
 
         setupTabBar()
+        setupMiddleView()
         setupMiddleBtn()
     }
 
@@ -45,20 +55,6 @@ class CustomTabBar: UITabBar {
 //    override func draw(_ rect: CGRect) {
 //        addShape()
 //    }
-    
-    /*
-     - UITabBar 범위 이상으로 버튼이 있을 때, UITabBar 범위에 벗어난 버튼도 눌릴 수 있도록 hitTest()
-     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        guard !clipsToBounds && !isHidden && alpha > 0 else { return nil }
-        for member in subviews.reversed() {
-            let subPoint = member.convert(point, from: self)
-            guard let result = member.hitTest(subPoint, with: event) else { continue }
-            return result
-        }
-        return nil
-     }
-     아래코드와 달리 해당 코드는 tabBar에서 벗어나는 middleButton 만 해당이 됌. 
-     */
     
     // middleButton 전역 touch 활성화
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
@@ -85,6 +81,17 @@ class CustomTabBar: UITabBar {
         middleButton.clipsToBounds = true
         middleButton.layer.cornerRadius = middleButton.frame.width / 2
         middleButton.addTarget(self, action: #selector(middleBtnAction), for: .touchUpInside)
+        
+        middleButton.layer.borderColor = UIColor(hex: "202632").cgColor
+        middleButton.layer.borderWidth = 6
+    }
+    
+    private func setupMiddleView() {
+        self.addSubview(middleView)
+        
+        middleView.frame = CGRect(x: (self.bounds.width / 2) - (87 / 2), y: -(87 / 2), width: 87, height: 87)
+        middleView.clipsToBounds = true
+        middleView.layer.cornerRadius = middleView.frame.width / 2
     }
     
     @objc func middleBtnAction() {
