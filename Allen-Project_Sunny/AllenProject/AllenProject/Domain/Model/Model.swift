@@ -25,6 +25,6 @@ struct LottoItem {
         LottoItem(buyMonth: 9, buyAmount: 15000, winAmount: 5000),
         LottoItem(buyMonth: 10, buyAmount: 170000, winAmount: 100000),
         LottoItem(buyMonth: 11, buyAmount: 35000, winAmount: 6000),
-        LottoItem(buyMonth: 12, buyAmount: 82000, winAmount: 2000)
+        LottoItem(buyMonth: 12, buyAmount: 2000, winAmount: 82000)
     ]
 }

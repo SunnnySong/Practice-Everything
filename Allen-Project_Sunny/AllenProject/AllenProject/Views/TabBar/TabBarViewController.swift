@@ -17,6 +17,7 @@ class TabBarViewController: UITabBarController {
     }
     
     private func tabBarConfigure() {
+        // TabBar 등록
         setValue(CustomTabBar(frame: tabBar.frame), forKey: "tabBar")
         
         delegate = self
@@ -64,7 +65,6 @@ extension TabBarViewController: UITabBarControllerDelegate {
      middleButton은 tabBar item[2]의 구역에 존재하지만, 포함되지 않는 부분도 존재.
      hitTest로 middleButton 전역이 눌릴 수 있도록 구현했으니, middleButton이 아닌 tabBar item[2]의 부분이 눌리지 않도록 tabBar item[2]를 비활성화 시킴.(select을 false로)
      */
-    
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         
         guard let selectedIndex = tabBarController.viewControllers?.firstIndex(of: viewController) else {

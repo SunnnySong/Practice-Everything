@@ -12,10 +12,11 @@ import SnapKit
 // MarkerView가 아니라 MarkerImage로 구현 가능
 class ChartMarkerView: MarkerView {
    
-    // TODO: MarkerView design 바꾸기, marker의 높이에 따라 chartView extraoffset 설정해주기
+    // TODO: marker의 높이에 따라 chartView extraoffset 설정해주기
     @IBOutlet weak var baseView: UIView!
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var moneyLabel: UILabel!
+    @IBOutlet weak var upDownImage: UIImageView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -41,5 +42,13 @@ class ChartMarkerView: MarkerView {
         
         monthLabel.text = "\(Int(entry.x)) 월"
         moneyLabel.text = "\(Int(entry.y)) 원"
+        
+        if entry.y > 0 {
+            upDownImage.image = UIImage(systemName: "arrowtriangle.up.fill")
+            upDownImage.tintColor = .red
+        } else {
+            upDownImage.image = UIImage(systemName: "arrowtriangle.down.fill")
+            upDownImage.tintColor = .blue
+        }
     }
 }

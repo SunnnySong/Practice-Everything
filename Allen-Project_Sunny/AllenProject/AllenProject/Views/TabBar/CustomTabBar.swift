@@ -56,13 +56,6 @@ class CustomTabBar: UITabBar {
 //        addShape()
 //    }
     
-    // middleButton 전역 touch 활성화
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-      guard !clipsToBounds && !isHidden && alpha > 0 else { return nil }
-
-      return self.middleButton.frame.contains(point) ? self.middleButton : super.hitTest(point, with: event)
-    }
-    
     private func setupTabBar() {
         let tabBarAppearance = UITabBarAppearance()
         tabBarAppearance.configureWithDefaultBackground()
@@ -97,6 +90,13 @@ class CustomTabBar: UITabBar {
     @objc func middleBtnAction() {
         middleBtnActionHandler()
         print("tapped")
+    }
+    
+    // middleButton 전역 touch 활성화
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+      guard !clipsToBounds && !isHidden && alpha > 0 else { return nil }
+
+      return self.middleButton.frame.contains(point) ? self.middleButton : super.hitTest(point, with: event)
     }
     
     // 곡선 TabBar

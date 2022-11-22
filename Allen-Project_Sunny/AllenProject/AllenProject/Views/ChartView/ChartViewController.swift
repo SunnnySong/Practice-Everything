@@ -20,11 +20,8 @@ final class ChartViewController: UIViewController {
         let chartView = BarChartView()
         
         // chart와 BarChartView 간 bottom 간격 조정
-        chartView.extraBottomOffset = 20
-        chartView.extraLeftOffset = 20
-        chartView.extraRightOffset = 20
-        chartView.extraTopOffset = 40
-        
+//        chartView.setExtraOffsets(left: 20, top: 20, right: 20, bottom: 20)
+
         // Hex color 사용할 수 있도록 UIColor에 extension함
         chartView.backgroundColor = UIColor(hex: "2B2C35")
         chartView.layer.cornerRadius = 20
@@ -32,6 +29,7 @@ final class ChartViewController: UIViewController {
         
         // chart 더블클릭시 확대되는 것 false
         chartView.setScaleEnabled(false)
+        chartView.doubleTapToZoomEnabled = false
 //        chartView.zoom(scaleX: 0.5, scaleY: 1, x: 0, y: 0)
         // chart bar 별 의미 적힌 동그라미 false
         chartView.legend.enabled = false
@@ -60,6 +58,15 @@ final class ChartViewController: UIViewController {
         chartView.rightAxis.enabled = false
         chartView.leftAxis.enabled = false
         
+        // zero line 활성화
+//        chartView.leftAxis.enabled = true
+//        chartView.leftAxis.drawAxisLineEnabled = false
+//        chartView.leftAxis.drawLabelsEnabled = false
+//        chartView.leftAxis.drawGridLinesEnabled = false
+//        chartView.leftAxis.zeroLineWidth = 5
+//        chartView.leftAxis.zeroLineColor = .yellow
+//        chartView.leftAxis.drawZeroLineEnabled = true
+        
         // xAxis label 비활성화
         chartView.xAxis.drawLabelsEnabled = false
         // xAxis 선 비활성화
@@ -74,6 +81,7 @@ final class ChartViewController: UIViewController {
         // xAsxis의 값을 index로 표현
 //        chartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: viewModel.monthLabel)
 //        chartView.xAxis.setLabelCount(12, force: false)
+        
     }
     
     private func setupChartData() {
@@ -95,17 +103,40 @@ extension ChartViewController: ChartViewDelegate {
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         
         let barHeight = self.chartView.getBarBounds(entry: entry as! BarChartDataEntry).height
-        print(barHeight)
+        let barY = self.chartView.getBarBounds(entry: entry as! BarChartDataEntry).minY
+        let barX = self.chartView.getBarBounds(entry: entry as! BarChartDataEntry).minX
+        
+        let markerWidth = chartMarkerView.baseView.frame.width
+        let markerHeight = chartMarkerView.baseView.frame.height
+        
+        let sidePadding = CGFloat(8)
+        let a = chartView.frame.width - sidePadding - barX
+        let b = markerWidth / 2 + sidePadding
+        
+        // +바이면 marker가 위쪽에 위치
         if highlight.y > 0 {
-            chartMarkerView.offset = .init(x: -(chartMarkerView.baseView.frame.width / 2), y: -(barHeight * 2 + 15))
-            print(chartMarkerView.offset.y)
+            // marker가 chartView를 벗어나는것을 방지.
+            if barY - (markerWidth/2 + sidePadding) < 0 {
+                chartMarkerView.offset = .init(x: -( markerWidth / 2), y: -(barY-sidePadding))
+            } else {
+                chartMarkerView.offset = .init(x: -( markerWidth / 2), y: -( markerHeight + sidePadding))
+            }
         } else {
-            chartMarkerView.offset = .init(x: -(chartMarkerView.baseView.frame.width / 2), y: (barHeight + 10))
+            // -바이면 marker가 아래쪽에 위치
+            // marker가 chartView를 벗어나는것을 방지.
+            if barY + barHeight + (markerWidth/2 + sidePadding) >= chartView.frame.height - sidePadding {
+                chartMarkerView.offset = .init(x: -(markerWidth / 2), y: chartView.frame.height-barY-(markerWidth/2 + sidePadding))
+            } else {
+                chartMarkerView.offset = .init(x: -(markerWidth / 2), y: barHeight + sidePadding)
+            }
         }
         
-//        print(entry)
-        if entry.x == 12.0 {
-//            chartMarkerView.offset = .init(x: -(baseView.frame.width / 2 + 40), y: -(baseView.frame.height + 3))
+        // 양 옆 사이드 marker 벗어나는것 방지
+        if barX - b < 0 {
+            chartMarkerView.offset.x = .init(-barX)
+        } else if a < b {
+            chartMarkerView.offset.x = .init(-(markerWidth / 2 + b - a + sidePadding))
         }
+
     }
 }
