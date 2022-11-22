@@ -60,7 +60,6 @@ class ChartViewModel {
         
         return data
     }
-    
 }
 
 

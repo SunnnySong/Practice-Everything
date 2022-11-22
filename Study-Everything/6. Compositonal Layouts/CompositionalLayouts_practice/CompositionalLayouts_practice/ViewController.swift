@@ -145,7 +145,3 @@ extension ViewController: UICollectionViewDelegate {
         return 4
     }
 }
-
-extension ViewController: UICollectionViewDelegateFlowLayout {
-    
-}

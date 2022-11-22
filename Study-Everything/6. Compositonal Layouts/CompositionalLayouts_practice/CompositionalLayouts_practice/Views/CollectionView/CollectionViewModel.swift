@@ -9,8 +9,8 @@ import UIKit
 
 struct CollectionViewModel {
     static func createLayout() -> UICollectionViewCompositionalLayout {
-       // section이 1개일때: UICollectionViewCompositionalLayout(section: <#T##NSCollectionLayoutSection#>)
-       // section이 여러개일때: UICollectionViewCompositionalLayout(sectionProvider: <#T##UICollectionViewCompositionalLayoutSectionProvider##UICollectionViewCompositionalLayoutSectionProvider##(Int, NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection?#>)
+//        section이 1개일때: UICollectionViewCompositionalLayout(section: <#T##NSCollectionLayoutSection#>)
+//        section이 여러개일때: UICollectionViewCompositionalLayout(sectionProvider: <#T##UICollectionViewCompositionalLayoutSectionProvider##UICollectionViewCompositionalLayoutSectionProvider##(Int, NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection?#>)
         
         let layout = UICollectionViewCompositionalLayout { (sectionNum, env) -> NSCollectionLayoutSection? in
             
@@ -40,9 +40,9 @@ struct CollectionViewModel {
                 
                 // 차트 형식으로 만들으려 하면, groupSize의 heightDimension을 .fractionalHeight로 설정X
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.87), heightDimension: .estimated(70))
-                // ViewController에서 이 section의 Item 갯수 12개 설정.
-                // layoutSize 크기의 repeatingSubitem을 count갯수만큼 반복해서 vertical한 group을 생성.
-                // 즉, 아래는 높이가 70만큼의 item 4개가 생성되는 것.
+//                 ViewController에서 이 section의 Item 갯수 12개 설정.
+//                 layoutSize 크기의 repeatingSubitem을 count갯수만큼 반복해서 vertical한 group을 생성.
+//                 즉, 아래는 높이가 70만큼의 item 4개가 생성되는 것.
                 let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, repeatingSubitem: item, count: 4)
                 
                 let section = NSCollectionLayoutSection(group: group)
