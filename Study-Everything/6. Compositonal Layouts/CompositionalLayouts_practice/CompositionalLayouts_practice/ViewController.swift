@@ -34,6 +34,7 @@ class ViewController: UIViewController {
         cv.register(CollectionViewCell2.self, forCellWithReuseIdentifier: "\(CollectionViewCell2.self)")
         cv.register(CollectionViewCell3.self, forCellWithReuseIdentifier: "\(CollectionViewCell3.self)")
         cv.register(CollectionViewCell4.self, forCellWithReuseIdentifier: "\(CollectionViewCell4.self)")
+        cv.register(CollectionViewCell5.self, forCellWithReuseIdentifier: "\(CollectionViewCell5.self)")
         // Header 등록
         cv.register(Header.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "\(Header.self)")
         return cv
@@ -82,12 +83,14 @@ extension ViewController: UICollectionViewDataSource {
     // section 별 item 갯수 정하기
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
+            return 1
+        } else if section == 1 {
             return 5
-        } else if section == 1{
-            return 12
-        } else if section == 2 {
+        } else if section == 2{
             return 12
         } else if section == 3 {
+            return 12
+        } else if section == 4 {
             return 7
         } else {
             return 5
@@ -100,12 +103,15 @@ extension ViewController: UICollectionViewDataSource {
         let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: "\(CollectionViewCell2.self)", for: indexPath) as! CollectionViewCell2
         let cell3 = collectionView.dequeueReusableCell(withReuseIdentifier: "\(CollectionViewCell3.self)", for: indexPath) as! CollectionViewCell3
         let cell4 = collectionView.dequeueReusableCell(withReuseIdentifier: "\(CollectionViewCell4.self)", for: indexPath) as! CollectionViewCell4
+        let cell5 = collectionView.dequeueReusableCell(withReuseIdentifier: "\(CollectionViewCell5.self)", for: indexPath) as! CollectionViewCell5
         
         if indexPath.section == 0 {
-            return cell1
+            return cell5
         } else if indexPath.section == 1 {
-            return cell2
+            return cell1
         } else if indexPath.section == 2 {
+            return cell2
+        } else if indexPath.section == 3 {
             return cell3
         } else {
             return cell4
@@ -142,6 +148,6 @@ extension ViewController: UICollectionViewDelegate {
 
     // collectionView에서 section의 갯수
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 4
+        return 5
     }
 }

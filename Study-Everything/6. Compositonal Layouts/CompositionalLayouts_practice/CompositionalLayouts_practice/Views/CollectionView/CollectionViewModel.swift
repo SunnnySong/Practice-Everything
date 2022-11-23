@@ -16,6 +16,15 @@ struct CollectionViewModel {
             
             switch sectionNum {
             case 0:
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(60))
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                group.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 20)
+                let section = NSCollectionLayoutSection(group: group)
+                return section
+                
+            case 1:
                 // fractionalHeight/fractionalWidth : containing group의 크기에 비례해서 크기 결정. 0 ~ 1
                 // Item
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
@@ -33,7 +42,7 @@ struct CollectionViewModel {
                 section.boundarySupplementaryItems = [header]
                 return section
                 
-            case 1:
+            case 2:
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 item.contentInsets = .init(top: 0, leading: 0, bottom: 10, trailing: 17)
@@ -54,7 +63,7 @@ struct CollectionViewModel {
                 section.boundarySupplementaryItems = [header]
                 return section
                 
-            case 2:
+            case 3:
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 item.contentInsets = .init(top: 0, leading: 0, bottom: 15, trailing: 17)
@@ -71,7 +80,7 @@ struct CollectionViewModel {
                 section.boundarySupplementaryItems = [header]
                 return section
                 
-            case 3:
+            case 4:
                 /*
                  한 group당 여러개의 Item이 들어가듯, group 또한 여러개의 group을 묶을 수 있음.
                  -> 하나의 section에 Item, group은 여러개 가능.
