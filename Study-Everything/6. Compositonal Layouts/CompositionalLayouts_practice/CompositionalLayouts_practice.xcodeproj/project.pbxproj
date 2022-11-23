@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F0D5019292E06F8007D1D6F /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0D5018292E06F8007D1D6F /* CollectionViewController.swift */; };
 		4F87C670291A9CCE00433A5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87C66F291A9CCE00433A5D /* AppDelegate.swift */; };
 		4F87C672291A9CCE00433A5D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87C671291A9CCE00433A5D /* SceneDelegate.swift */; };
 		4F87C674291A9CCE00433A5D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87C673291A9CCE00433A5D /* ViewController.swift */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		1580A8420DEFC6B6877EEA3B /* Pods-CompositionalLayouts_practice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CompositionalLayouts_practice.release.xcconfig"; path = "Target Support Files/Pods-CompositionalLayouts_practice/Pods-CompositionalLayouts_practice.release.xcconfig"; sourceTree = "<group>"; };
 		25B27512CAA0F2C230DF2685 /* Pods-CompositionalLayouts_practice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CompositionalLayouts_practice.debug.xcconfig"; path = "Target Support Files/Pods-CompositionalLayouts_practice/Pods-CompositionalLayouts_practice.debug.xcconfig"; sourceTree = "<group>"; };
+		4F0D5018292E06F8007D1D6F /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		4F87C66C291A9CCE00433A5D /* CompositionalLayouts_practice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CompositionalLayouts_practice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F87C66F291A9CCE00433A5D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F87C671291A9CCE00433A5D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				4F87C66F291A9CCE00433A5D /* AppDelegate.swift */,
 				4F87C671291A9CCE00433A5D /* SceneDelegate.swift */,
 				4F87C673291A9CCE00433A5D /* ViewController.swift */,
+				4F0D5018292E06F8007D1D6F /* CollectionViewController.swift */,
 				4F87C686291BA70D00433A5D /* Modules */,
 				4F87C683291AA22400433A5D /* Views */,
 				4F87C675291A9CCE00433A5D /* Main.storyboard */,
@@ -245,6 +248,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F0D5019292E06F8007D1D6F /* CollectionViewController.swift in Sources */,
 				4F87C688291BA77400433A5D /* FirstSectionButton.swift in Sources */,
 				4F87C68F291D555A00433A5D /* CollectionViewCell.swift in Sources */,
 				4F87C674291A9CCE00433A5D /* ViewController.swift in Sources */,
