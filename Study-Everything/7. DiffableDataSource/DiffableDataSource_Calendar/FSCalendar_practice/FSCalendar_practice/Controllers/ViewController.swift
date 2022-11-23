@@ -11,6 +11,8 @@ import SnapKit
 
 class ViewController: UIViewController {
 
+    var dataSource: UITableViewDiffableDataSource<Section, LottoData>!
+    
     let calendar = CalendarView()
     
     let lottoListdataManager = DataManager()
@@ -32,15 +34,17 @@ class ViewController: UIViewController {
         
         setupCalendar()
         setupTableView()
+        setupTableViewDataSource()
+        setupTableViewSnapshot()
     }
     
     // MARK: - Helpers
 
     private func setupTableView() {
-        lottoTableView.dataSource  = self
-        lottoTableView.delegate = self
-        
         view.addSubview(lottoTableView)
+        
+        self.lottoTableView.register(LottoTableViewCell.self, forCellReuseIdentifier: "\(LottoTableViewCell.self)")
+        
         lottoTableView.snp.makeConstraints { make in
             make.top.equalTo(calendar.snp.bottom).offset(30)
             make.left.right.equalToSuperview()
@@ -49,6 +53,27 @@ class ViewController: UIViewController {
         
         // row 구분선 제거
         lottoTableView.separatorStyle = .none
+    }
+    
+    private func setupTableViewDataSource() {
+        self.dataSource = UITableViewDiffableDataSource(tableView: self.lottoTableView) { (tableView, indexPath, itemIdentifier) -> UITableViewCell? in
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "\(LottoTableViewCell.self)", for: indexPath) as! LottoTableViewCell
+            
+            cell.setupData(date: itemIdentifier.buyDate,
+                           lottoType: itemIdentifier.lottoType.rawValue,
+                           LottoAmount: String(itemIdentifier.lottoAmount))
+            return cell
+        }
+    }
+    
+    private func setupTableViewSnapshot() {
+        let lottoArray = lottoListdataManager.findSelectedData(selectedDate: selectedDate)
+        
+        var snapshot = NSDiffableDataSourceSnapshot<Section, LottoData>()
+        snapshot.appendSections([.lottoView])
+        snapshot.appendItems(lottoArray)
+        self.dataSource.apply(snapshot, animatingDifferences: false)
     }
 
     private func setupCalendar() {
@@ -67,33 +92,6 @@ class ViewController: UIViewController {
 
 // MARK: - Extensions
 
-extension ViewController: UITableViewDataSource {
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(#function)
-        return lottoListdataManager.findSelectedData(selectedDate: selectedDate).count
-    }
-    
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // cell 등록
-        let cell = tableView.dequeueReusableCell(withIdentifier: "\(LottoTableViewCell.self)", for: indexPath) as! LottoTableViewCell
-        // selectedDate와 날짜가 동일한 lottoData를 불러오기
-        let lottoArray = lottoListdataManager.findSelectedData(selectedDate: selectedDate)[indexPath.row]
-        
-        // cell의 속성과 실제 데이터 연동
-        cell.dateLabel.text = lottoArray.buyDate
-        cell.lottoTypeLabel.text = lottoArray.lottoType.rawValue
-        cell.lottoAmountLabel.text = String(lottoArray.lottoAmount)
-        
-        print(#function)
-        return cell
-    }
-}
-
-extension ViewController: UITableViewDelegate {
-    
-}
-
-
 // FSCalendarDelegate
 extension ViewController: FSCalendarDelegate {
     // Calendar 주간, 월간 원활한 크기 변화를 위해
@@ -108,9 +106,7 @@ extension ViewController: FSCalendarDelegate {
         // 날짜 클릭시, selectedDate를 해당 날짜로 설정
         self.selectedDate = date
         
-        // ***** selectedDate에 맞는 lottoTableView를 다시 로드
-        // lottoTableView 다시 로드하면 tableView(_:cellForRowAt:), tableView(_:numberOfRowsInSection:) 등 모두 다시 로드
-        self.lottoTableView.reloadData()
+        self.setupTableViewSnapshot()
     }
     
     func calendar(_ calendar: FSCalendar, didDeselect date: Date, at monthPosition: FSCalendarMonthPosition) {
@@ -134,16 +130,7 @@ extension ViewController: FSCalendarDataSource {
     }
 }
 
-// HEX color
-extension UIColor {
-    convenience init(hex: String, alpha: CGFloat = 1.0) {
-        var hexFormatted: String = hex.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased()
-        if hexFormatted.hasPrefix("#") {
-            hexFormatted = String(hexFormatted.dropFirst())
-        }
-        assert(hexFormatted.count == 6, "Invalid hex code used.")
-        var rgbValue: UInt64 = 0
-        Scanner(string: hexFormatted).scanHexInt64(&rgbValue)
-        self.init(red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0, green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0, blue: CGFloat(rgbValue & 0x0000FF) / 255.0, alpha: alpha)
-    }
+enum Section {
+    case calendar
+    case lottoView
 }

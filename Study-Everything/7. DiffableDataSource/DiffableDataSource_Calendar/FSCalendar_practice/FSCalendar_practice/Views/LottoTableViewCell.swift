@@ -36,8 +36,7 @@ class LottoTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        autoLayout()
-        configuareUI()
+        setupCell()
     }
     
     required init?(coder: NSCoder) {
@@ -54,14 +53,19 @@ class LottoTableViewCell: UITableViewCell {
     
     // MARK: - Helpers
     
-    func configuareUI() {
+    func setupData(date: String, lottoType: String, LottoAmount: String) {
+        
+        self.dateLabel.text = date
+        self.lottoTypeLabel.text = lottoType
+        self.lottoAmountLabel.text = LottoAmount
+    }
+
+    func setupCell() {
         contentView.backgroundColor = UIColor(hex: "fcc0ec", alpha: 0.72)
         contentView.layer.cornerRadius = 20
         contentView.clipsToBounds = true
-    }
-
-    func autoLayout() {
         contentView.addSubview(dateLabel)
+        
         dateLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(10)
             make.left.equalToSuperview().inset(20)
