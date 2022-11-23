@@ -10,8 +10,6 @@ import Charts
 
 class ChartViewModel {
     
-    var monthLabel = ["","1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
-    
     // 1. BarChartDataEntry 변환하기.
     // BarChartDataEntry의 x, y는 모두 Double 타입
     private func setBarChartDataEntry(completion: ([BarChartDataSet]) -> [BarChartDataSet]) -> [BarChartDataSet] {

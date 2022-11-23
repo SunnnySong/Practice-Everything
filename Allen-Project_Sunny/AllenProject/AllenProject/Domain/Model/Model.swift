@@ -5,7 +5,7 @@
 //  Created by 송선진 on 2022/11/15.
 //
 
-import Foundation
+import UIKit
 
 // 서버에서 받아오는 데이터 타입.. 이지만 일단 사용하기 쉬운 데이터 타입으로 임의 설정
 struct LottoItem {
