@@ -52,13 +52,6 @@ class LottoTableViewCell: UITableViewCell {
     }
     
     // MARK: - Helpers
-    
-    func setupData(date: String, lottoType: String, LottoAmount: String) {
-        
-        self.dateLabel.text = date
-        self.lottoTypeLabel.text = lottoType
-        self.lottoAmountLabel.text = LottoAmount
-    }
 
     func setupCell() {
         contentView.backgroundColor = UIColor(hex: "fcc0ec", alpha: 0.72)

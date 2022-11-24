@@ -12,6 +12,34 @@ enum LottoType: String {
     case instantLotto = "스피또"
 }
 
+/* struct가 아닌, class로 Hashable을 만들 경우
+ class LottoData2 {
+     
+     let uuid: UUID = UUID()
+     var buyDate: String = ""
+     var lottoType: LottoType
+     var lottoAmount: Int = 0
+     
+     init(date: String, type: LottoType, amount: Int) {
+         self.buyDate = date
+         self.lottoType = type
+         self.lottoAmount = amount
+     }
+ }
+
+ extension LottoData2: Hashable {
+     static func == (lhs: LottoData2, rhs: LottoData2) -> Bool {
+         return lhs.buyDate == rhs.buyDate && lhs.lottoType == rhs.lottoType && lhs.lottoAmount == rhs.lottoAmount
+     }
+     
+     func hash(into hasher: inout Hasher) {
+         hasher.combine(buyDate)
+         hasher.combine(lottoType)
+         hasher.combine(lottoAmount)
+     }
+ } 
+ */
+
 struct LottoData: Hashable {
     let uuid: UUID = UUID()
     var buyDate: String

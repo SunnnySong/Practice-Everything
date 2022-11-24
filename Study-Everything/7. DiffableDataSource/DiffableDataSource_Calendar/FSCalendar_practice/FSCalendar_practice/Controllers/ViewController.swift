@@ -9,6 +9,7 @@ import UIKit
 import FSCalendar
 import SnapKit
 
+// tableView diffableDataSource 참조 :  https://rldd.tistory.com/493
 class ViewController: UIViewController {
 
     var dataSource: UITableViewDiffableDataSource<Section, LottoData>!
@@ -16,12 +17,9 @@ class ViewController: UIViewController {
     let calendar = CalendarView()
     
     let lottoListdataManager = DataManager()
-    let lottoListCell = LottoTableViewCell()
     
     let lottoTableView: UITableView = {
         let tableView = UITableView()
-        // tableViewCell 등록
-        tableView.register(LottoTableViewCell.self, forCellReuseIdentifier: "\(LottoTableViewCell.self)")
         // tableView에 하나의 item이 속해있는 row 높이 설정
         tableView.rowHeight = 86
         return tableView
@@ -56,13 +54,14 @@ class ViewController: UIViewController {
     }
     
     private func setupTableViewDataSource() {
-        self.dataSource = UITableViewDiffableDataSource(tableView: self.lottoTableView) { (tableView, indexPath, itemIdentifier) -> UITableViewCell? in
+
+        self.dataSource = UITableViewDiffableDataSource<Section, LottoData>(tableView: self.lottoTableView) { (tableView, indexPath, itemIdentifier) -> UITableViewCell? in
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "\(LottoTableViewCell.self)", for: indexPath) as! LottoTableViewCell
-            
-            cell.setupData(date: itemIdentifier.buyDate,
-                           lottoType: itemIdentifier.lottoType.rawValue,
-                           LottoAmount: String(itemIdentifier.lottoAmount))
+
+            cell.dateLabel.text = itemIdentifier.buyDate
+            cell.lottoTypeLabel.text = itemIdentifier.lottoType.rawValue
+            cell.lottoAmountLabel.text = String(itemIdentifier.lottoAmount)
             return cell
         }
     }
@@ -108,12 +107,6 @@ extension ViewController: FSCalendarDelegate {
         
         self.setupTableViewSnapshot()
     }
-    
-    func calendar(_ calendar: FSCalendar, didDeselect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .full
-//        print(dateFormatter.string(from: date) + " 날짜 선택 완료")
-    }
 }
 
 // FSCalendarDataSource
@@ -131,6 +124,5 @@ extension ViewController: FSCalendarDataSource {
 }
 
 enum Section {
-    case calendar
     case lottoView
 }
