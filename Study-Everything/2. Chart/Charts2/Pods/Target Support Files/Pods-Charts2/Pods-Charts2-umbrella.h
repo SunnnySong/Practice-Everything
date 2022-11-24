@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_AllenProjectVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_AllenProjectVersionString[];
+FOUNDATION_EXPORT double Pods_Charts2VersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_Charts2VersionString[];
 

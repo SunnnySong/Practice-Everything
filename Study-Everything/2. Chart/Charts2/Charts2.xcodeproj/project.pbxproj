@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		37E293CDF889D332DD859C7B /* Pods_AllenProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ACBDE1D8DC359A479EFF239 /* Pods_AllenProject.framework */; };
 		4F690D502923664D006FAD36 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D4F2923664D006FAD36 /* DateViewController.swift */; };
 		4F690D522923665C006FAD36 /* LottoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D512923665C006FAD36 /* LottoViewController.swift */; };
 		4F690D5429236668006FAD36 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D5329236668006FAD36 /* ChartViewController.swift */; };
@@ -25,10 +24,13 @@
 		4F8711FD292280AC00BE353D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F8711FB292280AC00BE353D /* LaunchScreen.storyboard */; };
 		4F87120D29228D6300BE353D /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87120C29228D6300BE353D /* UIColor.swift */; };
 		4F87120F29228FA300BE353D /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87120E29228FA300BE353D /* Model.swift */; };
+		D919AB092CCF694213DD3F47 /* Pods_Charts2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 808EA88EA1AC9E0E9D341EFA /* Pods_Charts2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E5C0750D68EC6D54AAD08AD /* Pods-Charts2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Charts2.release.xcconfig"; path = "Target Support Files/Pods-Charts2/Pods-Charts2.release.xcconfig"; sourceTree = "<group>"; };
 		1391733C0EEED7C69949453A /* Pods-AllenProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllenProject.debug.xcconfig"; path = "Target Support Files/Pods-AllenProject/Pods-AllenProject.debug.xcconfig"; sourceTree = "<group>"; };
+		21F8F4DE8D6C7F39B2F46651 /* Pods-Charts2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Charts2.debug.xcconfig"; path = "Target Support Files/Pods-Charts2/Pods-Charts2.debug.xcconfig"; sourceTree = "<group>"; };
 		4F690D4F2923664D006FAD36 /* DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
 		4F690D512923665C006FAD36 /* LottoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoViewController.swift; sourceTree = "<group>"; };
 		4F690D5329236668006FAD36 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
@@ -48,7 +50,7 @@
 		4F8711FE292280AC00BE353D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F87120C29228D6300BE353D /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		4F87120E29228FA300BE353D /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		7ACBDE1D8DC359A479EFF239 /* Pods_AllenProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AllenProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		808EA88EA1AC9E0E9D341EFA /* Pods_Charts2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Charts2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		98B7C7C99E683661F22251BE /* Pods-AllenProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllenProject.release.xcconfig"; path = "Target Support Files/Pods-AllenProject/Pods-AllenProject.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37E293CDF889D332DD859C7B /* Pods_AllenProject.framework in Frameworks */,
+				D919AB092CCF694213DD3F47 /* Pods_Charts2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,7 +69,7 @@
 		1EA08465A12AB8ED5D6D01A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7ACBDE1D8DC359A479EFF239 /* Pods_AllenProject.framework */,
+				808EA88EA1AC9E0E9D341EFA /* Pods_Charts2.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -128,7 +130,8 @@
 				4F871205292282E500BE353D /* Views */,
 				4F87120B29228D3E00BE353D /* Extensions */,
 			);
-			path = AllenProject;
+			name = AllenProject;
+			path = Charts2;
 			sourceTree = "<group>";
 		};
 		4F871205292282E500BE353D /* Views */ = {
@@ -200,6 +203,8 @@
 			children = (
 				1391733C0EEED7C69949453A /* Pods-AllenProject.debug.xcconfig */,
 				98B7C7C99E683661F22251BE /* Pods-AllenProject.release.xcconfig */,
+				21F8F4DE8D6C7F39B2F46651 /* Pods-Charts2.debug.xcconfig */,
+				0E5C0750D68EC6D54AAD08AD /* Pods-Charts2.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -280,15 +285,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AllenProject/Pods-AllenProject-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Charts2/Pods-Charts2-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AllenProject/Pods-AllenProject-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Charts2/Pods-Charts2-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AllenProject/Pods-AllenProject-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Charts2/Pods-Charts2-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		87FBFA6474DB343A25213E9B /* [CP] Check Pods Manifest.lock */ = {
@@ -306,7 +311,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-AllenProject-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Charts2-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -474,7 +479,7 @@
 		};
 		4F871202292280AC00BE353D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1391733C0EEED7C69949453A /* Pods-AllenProject.debug.xcconfig */;
+			baseConfigurationReference = 21F8F4DE8D6C7F39B2F46651 /* Pods-Charts2.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -482,7 +487,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F2W258F5P6;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = AllenProject/Info.plist;
+				INFOPLIST_FILE = Charts2/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -506,7 +511,7 @@
 		};
 		4F871203292280AC00BE353D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 98B7C7C99E683661F22251BE /* Pods-AllenProject.release.xcconfig */;
+			baseConfigurationReference = 0E5C0750D68EC6D54AAD08AD /* Pods-Charts2.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -514,7 +519,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F2W258F5P6;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = AllenProject/Info.plist;
+				INFOPLIST_FILE = Charts2/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
