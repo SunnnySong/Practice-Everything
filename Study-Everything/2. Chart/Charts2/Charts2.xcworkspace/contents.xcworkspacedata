@@ -2,12 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/songsunjin/Desktop/Swift/SwiftPractice-Everything/Study-Everything/2. Chart/AllenProject/Charts2.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Pods/Pods.xcodeproj">
+      location = "group:Charts2.xcworkspace">
    </FileRef>
    <FileRef
       location = "group:Charts2.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>
