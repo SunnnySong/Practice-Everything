@@ -57,8 +57,8 @@ class LottoTableViewCell: UITableViewCell {
         contentView.backgroundColor = UIColor(hex: "fcc0ec", alpha: 0.72)
         contentView.layer.cornerRadius = 20
         contentView.clipsToBounds = true
-        contentView.addSubview(dateLabel)
         
+        contentView.addSubview(dateLabel)
         dateLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(10)
             make.left.equalToSuperview().inset(20)

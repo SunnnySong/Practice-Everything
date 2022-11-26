@@ -8,15 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		37E293CDF889D332DD859C7B /* Pods_AllenProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ACBDE1D8DC359A479EFF239 /* Pods_AllenProject.framework */; };
+		4F0D502529312C36007D1D6F /* LottoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0D502429312C36007D1D6F /* LottoListCell.swift */; };
 		4F690D502923664D006FAD36 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D4F2923664D006FAD36 /* DateViewController.swift */; };
 		4F690D522923665C006FAD36 /* LottoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D512923665C006FAD36 /* LottoViewController.swift */; };
 		4F690D5429236668006FAD36 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D5329236668006FAD36 /* ChartViewController.swift */; };
 		4F690D562923668D006FAD36 /* RandomMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D552923668D006FAD36 /* RandomMoneyViewController.swift */; };
 		4F690D5829237C7D006FAD36 /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D5729237C7D006FAD36 /* ChartViewModel.swift */; };
-		4F690D5C2923DA86006FAD36 /* ChartMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D5B2923DA86006FAD36 /* ChartMarkerView.swift */; };
-		4F690D5F2923E850006FAD36 /* MarkerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F690D5E2923E850006FAD36 /* MarkerView.xib */; };
 		4F690D6229250E4E006FAD36 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D6129250E4E006FAD36 /* TabBarViewController.swift */; };
 		4F690D6429275040006FAD36 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D6329275040006FAD36 /* CustomTabBar.swift */; };
+		4F794DD929329905002DB462 /* LottoListDataSourceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F794DD829329905002DB462 /* LottoListDataSourceController.swift */; };
 		4F8711F1292280AC00BE353D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8711F0292280AC00BE353D /* AppDelegate.swift */; };
 		4F8711F3292280AC00BE353D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8711F2292280AC00BE353D /* SceneDelegate.swift */; };
 		4F8711F5292280AC00BE353D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8711F4292280AC00BE353D /* HomeViewController.swift */; };
@@ -29,15 +29,15 @@
 
 /* Begin PBXFileReference section */
 		1391733C0EEED7C69949453A /* Pods-AllenProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllenProject.debug.xcconfig"; path = "Target Support Files/Pods-AllenProject/Pods-AllenProject.debug.xcconfig"; sourceTree = "<group>"; };
+		4F0D502429312C36007D1D6F /* LottoListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoListCell.swift; sourceTree = "<group>"; };
 		4F690D4F2923664D006FAD36 /* DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
 		4F690D512923665C006FAD36 /* LottoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoViewController.swift; sourceTree = "<group>"; };
 		4F690D5329236668006FAD36 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		4F690D552923668D006FAD36 /* RandomMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomMoneyViewController.swift; sourceTree = "<group>"; };
 		4F690D5729237C7D006FAD36 /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
-		4F690D5B2923DA86006FAD36 /* ChartMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartMarkerView.swift; sourceTree = "<group>"; };
-		4F690D5E2923E850006FAD36 /* MarkerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkerView.xib; sourceTree = "<group>"; };
 		4F690D6129250E4E006FAD36 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		4F690D6329275040006FAD36 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		4F794DD829329905002DB462 /* LottoListDataSourceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoListDataSourceController.swift; sourceTree = "<group>"; };
 		4F8711ED292280AC00BE353D /* AllenProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AllenProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F8711F0292280AC00BE353D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F8711F2292280AC00BE353D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,20 +75,12 @@
 		4F690D5929237C80006FAD36 /* ChartView */ = {
 			isa = PBXGroup;
 			children = (
-				4F690D5D2923E800006FAD36 /* MarkerView */,
 				4F690D5729237C7D006FAD36 /* ChartViewModel.swift */,
 				4F690D5329236668006FAD36 /* ChartViewController.swift */,
+				4F0D502429312C36007D1D6F /* LottoListCell.swift */,
+				4F794DD829329905002DB462 /* LottoListDataSourceController.swift */,
 			);
 			path = ChartView;
-			sourceTree = "<group>";
-		};
-		4F690D5D2923E800006FAD36 /* MarkerView */ = {
-			isa = PBXGroup;
-			children = (
-				4F690D5B2923DA86006FAD36 /* ChartMarkerView.swift */,
-				4F690D5E2923E850006FAD36 /* MarkerView.xib */,
-			);
-			path = MarkerView;
 			sourceTree = "<group>";
 		};
 		4F690D6029250E2F006FAD36 /* TabBar */ = {
@@ -264,7 +256,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F690D5F2923E850006FAD36 /* MarkerView.xib in Resources */,
 				4F8711FD292280AC00BE353D /* LaunchScreen.storyboard in Resources */,
 				4F8711FA292280AC00BE353D /* Assets.xcassets in Resources */,
 				4F8711F8292280AC00BE353D /* Main.storyboard in Resources */,
@@ -321,14 +312,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F8711F5292280AC00BE353D /* HomeViewController.swift in Sources */,
+				4F794DD929329905002DB462 /* LottoListDataSourceController.swift in Sources */,
 				4F87120D29228D6300BE353D /* UIColor.swift in Sources */,
 				4F690D522923665C006FAD36 /* LottoViewController.swift in Sources */,
 				4F690D6429275040006FAD36 /* CustomTabBar.swift in Sources */,
 				4F8711F1292280AC00BE353D /* AppDelegate.swift in Sources */,
 				4F87120F29228FA300BE353D /* Model.swift in Sources */,
+				4F0D502529312C36007D1D6F /* LottoListCell.swift in Sources */,
 				4F690D5829237C7D006FAD36 /* ChartViewModel.swift in Sources */,
 				4F690D6229250E4E006FAD36 /* TabBarViewController.swift in Sources */,
-				4F690D5C2923DA86006FAD36 /* ChartMarkerView.swift in Sources */,
 				4F690D5429236668006FAD36 /* ChartViewController.swift in Sources */,
 				4F690D502923664D006FAD36 /* DateViewController.swift in Sources */,
 				4F8711F3292280AC00BE353D /* SceneDelegate.swift in Sources */,
