@@ -10,6 +10,8 @@ import SnapKit
 
 class LottoListCell: UITableViewCell {
     
+    typealias Section = LottoListDataSourceController.Section
+    
     // mainImage에서 Image를 설정했지만, UIImageView와 Image 사이 inset 주는데 실패하고, view 하나 더 올려 간격 줌.
     var mainImageView: UIView = {
         let view = UIView()
@@ -31,6 +33,7 @@ class LottoListCell: UITableViewCell {
     var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 17, weight: .bold)
+        label.textColor = .white
         return label
     }()
    
@@ -43,6 +46,7 @@ class LottoListCell: UITableViewCell {
     var amountLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.textColor = .white
         return label
     }()
     
@@ -61,16 +65,11 @@ class LottoListCell: UITableViewCell {
         
         // cell간 간격 주기 위해 contentView에 올리고 Inset 설정
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 8, left: 15, bottom: 8, right: 15))
-    
-        if sOrFLabel.text == GoalResult.success.rawValue {
-            sOrFLabel.textColor = .green
-        } else if sOrFLabel.text == GoalResult.fail.rawValue {
-            sOrFLabel.textColor = .red
-        }
     }
     
     private func setupCell() {
-        contentView.backgroundColor = .yellow
+        contentView.backgroundColor = .clear
+        self.backgroundColor = .purple
         
         contentView.addSubview(mainImageView)
         mainImageView.snp.makeConstraints { make in
@@ -119,6 +118,21 @@ class LottoListCell: UITableViewCell {
         }
         attributedString.append(NSAttributedString(attachment: imageAttachment))
         sOrFLabel.attributedText = attributedString
+    }
+    
+    func setupCell(section: Int, percent: Int) {
+        if section == 0 {
+            titleLabel.text = Section.goal.title
+            mainImage.image = Section.goal.image
+        } else if section == 1 {
+            titleLabel.text = Section.buy.title
+            mainImage.image = Section.buy.image
+        } else {
+            titleLabel.text = Section.win.title
+            mainImage.image = Section.win.image
+            // 마지막 cell에서는 구매금액 - 당첨금액 으로 % 내야하기 때문에 따로 설정
+            self.setupPercent(percent: percent)
+        }
     }
 }
 

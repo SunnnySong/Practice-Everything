@@ -12,36 +12,16 @@ import SnapKit
 // bar 모서리 라운드 처리 : https://wlxo0401.oopy.io/8082412e-80e9-4f79-b2a1-164a9036fc6f
 
 // dataSource 관련 참조: 보고 코드 정리하기. https://www.hackingwithswift.com/forums/ios/uitableview-diffable-data-source-section-headers-putting-data-source-outside-viewcontroller/2125
-enum Section {
-    case goal
-    case buy
-    case win
-}
 
-enum GoalResult: String {
-    case success = "달성 완료!"
-    case fail = "달성 실패!"
-    case percent
-}
+
 
 final class ChartViewController: UIViewController {
-    
-    struct Amount: Hashable {
-        // 여기에 image, title 다 넣어서 만들어보기
-        let id = UUID()
-        var amount: Double
-        var result: String
-        var percent: Int
-    }
     
     let viewModel = ChartViewModel()
     
     private let chartView: BarChartView = {
         let chartView = BarChartView()
-        
-        // chart와 BarChartView 간 bottom 간격 조정
-//        chartView.setExtraOffsets(left: 20, top: 20, right: 20, bottom: 20)
-
+    
         // Hex color 사용할 수 있도록 UIColor에 extension함
         chartView.backgroundColor = UIColor(hex: "2B2C35")
         chartView.layer.cornerRadius = 20
@@ -59,10 +39,18 @@ final class ChartViewController: UIViewController {
     private let lottoListView: UITableView = {
         let cv = UITableView(frame: .zero)
         cv.isScrollEnabled = false
-        cv.backgroundColor = .white
+        cv.backgroundColor = .clear
         cv.rowHeight = 70
+        
+        let header = LottoListHeader(frame: .init(x: 0, y: 0, width: cv.frame.size.width, height: 30))
+        // delegate로 설정한 header은 tableView의 section마다 달리는 header. 이것은 전체 tableView의 header
+        cv.tableHeaderView = header
         return cv
     }()
+    
+    // TODO: typealias 공부하기
+    typealias Section = LottoListDataSourceController.Section
+    typealias Amount = LottoListDataSourceController.Amount
     
     var dataSource: UITableViewDiffableDataSource<Section, Amount>!
     
@@ -105,6 +93,7 @@ final class ChartViewController: UIViewController {
     
     private func setupLottoListView() {
         view.addSubview(lottoListView)
+        lottoListView.backgroundColor = .blue
         
         // 구분선 제거
         lottoListView.separatorStyle = .none
@@ -115,7 +104,7 @@ final class ChartViewController: UIViewController {
             make.top.equalTo(chartView.snp.bottom).offset(20)
             make.left.right.equalToSuperview().inset(20)
 //            make.bottom.equalToSuperview().inset(50)
-            make.height.equalTo(240)
+            make.height.equalTo(380)
         }
     }
     
@@ -123,45 +112,24 @@ final class ChartViewController: UIViewController {
         self.dataSource = UITableViewDiffableDataSource(tableView: self.lottoListView) { (tableView, indexPath, item) -> UITableViewCell? in
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "\(LottoListCell.self)", for: indexPath) as! LottoListCell
+            
             cell.amountLabel.text = String("\(Int(item.amount)) 원")
-            
-            if indexPath.section == 0 {
-                cell.titleLabel.text = "목표 금액"
-                cell.mainImage.image = UIImage(named: "medal")
-                cell.sOrFLabel.text = item.result
-            } else if indexPath.section == 1 {
-                cell.titleLabel.text = "구매 금액"
-                cell.mainImage.image = UIImage(named: "happy")
-                cell.sOrFLabel.text = item.result
-            } else {
-                cell.titleLabel.text = "당첨 금액"
-                cell.mainImage.image = UIImage(named: "trophy")
-                // 마지막 cell에서는 구매금액 - 당첨금액 으로 % 내야하기 때문에 따로 설정
-                cell.setupPercent(percent: item.percent)
-            }
-            
+            cell.sOrFLabel.text = item.result.title
+            cell.sOrFLabel.textColor = item.result.textColor
+            cell.setupCell(section: indexPath.section, percent: item.percent)
             return cell
-            
         }
+        
     }
     
     private func setupLottoListSnapshot() {
-        let monthData = viewModel.getMonthList(month: 3.0)
-        var result = GoalResult.percent
-        let goalAmount = monthData.goalAmount
-        let buyAmount = monthData.buyAmount
-        let winAmount = monthData.winAmount
-        let percent = ((winAmount - buyAmount) / buyAmount) * 100
+        // TODO: code 나누기
+        let data = viewModel.getMonthList(month: 5.0)
+        guard let percentData = viewModel.getMonthPercent(month: 5.0).first else { return }
         
-        if Int(goalAmount) >= Int(buyAmount) {
-            result = .success
-        } else {
-            result = .fail
-        }
-        
-        let item1 = [Amount(amount: goalAmount, result: result.rawValue, percent: Int(percent))]
-        let item2 = [Amount(amount: buyAmount, result: result.rawValue, percent: Int(percent))]
-        let item3 = [Amount(amount: winAmount, result: result.rawValue, percent: Int(percent))]
+        let item1 = [Amount(amount: data.goalAmount, result: percentData.key, percent: percentData.value)]
+        let item2 = [Amount(amount: data.buyAmount, result: percentData.key, percent: percentData.value)]
+        let item3 = [Amount(amount: data.winAmount, result: percentData.key, percent: percentData.value)]
         
         var snapshot = NSDiffableDataSourceSnapshot<Section, Amount>()
         
