@@ -13,11 +13,14 @@ import SnapKit
 
 // dataSource 관련 참조: 보고 코드 정리하기. https://www.hackingwithswift.com/forums/ios/uitableview-diffable-data-source-section-headers-putting-data-source-outside-viewcontroller/2125
 
-
+// TODO: 오늘 년도에 맞게, 선택된 연도에 맞게 chart 로드 다시하기
 
 final class ChartViewController: UIViewController {
     
-    let viewModel = ChartViewModel()
+    // MARK: - Propertises
+    
+    let chartViewModel = ChartViewModel()
+    let lottoListViewModel = LottoListViewModel()
     
     private let chartView: BarChartView = {
         let chartView = BarChartView()
@@ -41,10 +44,6 @@ final class ChartViewController: UIViewController {
         cv.isScrollEnabled = false
         cv.backgroundColor = .clear
         cv.rowHeight = 70
-        
-        let header = LottoListHeader(frame: .init(x: 0, y: 0, width: cv.frame.size.width, height: 30))
-        // delegate로 설정한 header은 tableView의 section마다 달리는 header. 이것은 전체 tableView의 header
-        cv.tableHeaderView = header
         return cv
     }()
     
@@ -54,6 +53,8 @@ final class ChartViewController: UIViewController {
     
     var dataSource: UITableViewDiffableDataSource<Section, Amount>!
     
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -63,8 +64,12 @@ final class ChartViewController: UIViewController {
         setupLottoListView()
         setupLottoListDataSource()
         setupLottoListSnapshot()
+        
+        setupDatePicker()
     }
     
+    // MARK: - Helpers
+
     private func setupChartView() {
         view.addSubview(chartView)
         chartView.delegate = self
@@ -88,12 +93,12 @@ final class ChartViewController: UIViewController {
     }
     
     private func setupChartData() {
-        chartView.data = viewModel.setBarChartData()
+        chartView.data = chartViewModel.setBarChartData()
     }
     
     private func setupLottoListView() {
         view.addSubview(lottoListView)
-        lottoListView.backgroundColor = .blue
+        lottoListView.backgroundColor = .green
         
         // 구분선 제거
         lottoListView.separatorStyle = .none
@@ -106,6 +111,11 @@ final class ChartViewController: UIViewController {
 //            make.bottom.equalToSuperview().inset(50)
             make.height.equalTo(380)
         }
+    
+        // delegate로 설정한 header은 tableView의 section마다 달리는 header. 이것은 전체 tableView의 header
+        let header = LottoListHeader(frame: .init(x: 0, y: 0, width: lottoListView.frame.size.width, height: 30))
+        header.dateTextField.delegate = self
+        lottoListView.tableHeaderView = header
     }
     
     private func setupLottoListDataSource() {
@@ -123,9 +133,10 @@ final class ChartViewController: UIViewController {
     }
     
     private func setupLottoListSnapshot() {
-        // TODO: code 나누기
-        let data = viewModel.getMonthList(month: 5.0)
-        guard let percentData = viewModel.getMonthPercent(month: 5.0).first else { return }
+        guard let month = Double(lottoListViewModel.getTodayDate()[1]) else { return }
+        
+        let data = lottoListViewModel.getMonthList(month: month)
+        guard let percentData = lottoListViewModel.getMonthPercent(month: month).first else { return }
         
         let item1 = [Amount(amount: data.goalAmount, result: percentData.key, percent: percentData.value)]
         let item2 = [Amount(amount: data.buyAmount, result: percentData.key, percent: percentData.value)]
@@ -140,13 +151,40 @@ final class ChartViewController: UIViewController {
         
         self.dataSource.apply(snapshot, animatingDifferences: false)
     }
+    
+    private func setupDatePicker() {
+//        view.addSubview(datePickerView)
+        
+//        datePickerView.dataSource = self
+    }
 }
 
+
+// MARK: - Extension
+
+// ChartViewDelegate
 extension ChartViewController: ChartViewDelegate {
     
     // bar 클릭시 실행되는 함수
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         
        print(entry)
+    }
+}
+
+// DatePickerDelegate
+extension ChartViewController: DatePickerViewDelegate {
+    func didSelectedDate() {
+        print("ChartViewController) didSelectedDate")
+        
+    }
+}
+
+// UITextFieldDelegate
+extension ChartViewController: UITextFieldDelegate {
+    
+    // LottoListHeader의 dateTextField 수정 불가능하게 설정
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return false
     }
 }

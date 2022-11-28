@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		37E293CDF889D332DD859C7B /* Pods_AllenProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ACBDE1D8DC359A479EFF239 /* Pods_AllenProject.framework */; };
 		4F0D502529312C36007D1D6F /* LottoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0D502429312C36007D1D6F /* LottoListCell.swift */; };
+		4F18EDBF2934CB2100A444B8 /* LottoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F18EDBE2934CB2100A444B8 /* LottoListViewModel.swift */; };
 		4F690D502923664D006FAD36 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D4F2923664D006FAD36 /* DateViewController.swift */; };
 		4F690D522923665C006FAD36 /* LottoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D512923665C006FAD36 /* LottoViewController.swift */; };
 		4F690D5429236668006FAD36 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D5329236668006FAD36 /* ChartViewController.swift */; };
@@ -31,6 +32,7 @@
 /* Begin PBXFileReference section */
 		1391733C0EEED7C69949453A /* Pods-AllenProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllenProject.debug.xcconfig"; path = "Target Support Files/Pods-AllenProject/Pods-AllenProject.debug.xcconfig"; sourceTree = "<group>"; };
 		4F0D502429312C36007D1D6F /* LottoListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoListCell.swift; sourceTree = "<group>"; };
+		4F18EDBE2934CB2100A444B8 /* LottoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoListViewModel.swift; sourceTree = "<group>"; };
 		4F690D4F2923664D006FAD36 /* DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
 		4F690D512923665C006FAD36 /* LottoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoViewController.swift; sourceTree = "<group>"; };
 		4F690D5329236668006FAD36 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
@@ -77,7 +79,8 @@
 		4F690D5929237C80006FAD36 /* ChartView */ = {
 			isa = PBXGroup;
 			children = (
-				4F794DDA29344F81002DB462 /* Chart */,
+				4F690D5329236668006FAD36 /* ChartViewController.swift */,
+				4F794DDA29344F81002DB462 /* ViewModel */,
 				4F794DDB29344F87002DB462 /* LottoList */,
 			);
 			path = ChartView;
@@ -92,13 +95,13 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
-		4F794DDA29344F81002DB462 /* Chart */ = {
+		4F794DDA29344F81002DB462 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				4F690D5729237C7D006FAD36 /* ChartViewModel.swift */,
-				4F690D5329236668006FAD36 /* ChartViewController.swift */,
+				4F18EDBE2934CB2100A444B8 /* LottoListViewModel.swift */,
 			);
-			path = Chart;
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		4F794DDB29344F87002DB462 /* LottoList */ = {
@@ -343,6 +346,7 @@
 				4F690D5429236668006FAD36 /* ChartViewController.swift in Sources */,
 				4F690D502923664D006FAD36 /* DateViewController.swift in Sources */,
 				4F8711F3292280AC00BE353D /* SceneDelegate.swift in Sources */,
+				4F18EDBF2934CB2100A444B8 /* LottoListViewModel.swift in Sources */,
 				4F794DDD29344FAA002DB462 /* LottoListHeader.swift in Sources */,
 				4F690D562923668D006FAD36 /* RandomMoneyViewController.swift in Sources */,
 			);

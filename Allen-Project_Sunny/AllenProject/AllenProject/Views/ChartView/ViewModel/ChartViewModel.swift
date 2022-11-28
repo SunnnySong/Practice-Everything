@@ -10,8 +10,6 @@ import Charts
 
 class ChartViewModel {
     
-    typealias GoalResult = LottoListDataSourceController.GoalResult
-    
     // 1. BarChartDataEntry 변환하기.
     // BarChartDataEntry의 x, y는 모두 Double 타입
     private func setBarChartDataEntry(completion: (BarChartDataSet) -> BarChartDataSet) -> BarChartDataSet {
@@ -43,30 +41,6 @@ class ChartViewModel {
         let data = BarChartData(dataSet: chartData)
         
         return data
-    }
-    
-    // rowData에서 특정 월 데이터 뽑아내기
-    func getMonthList(month: Double) -> LottoItem {
-        let rowData = LottoItem.rowData
-        let monthData = rowData.filter { $0.buyMonth == month }
-        return monthData[0]
-    }
-    
-    // 특정 월의 당첨 퍼센테이지 구하기
-    func getMonthPercent(month: Double) -> [GoalResult : Int] {
-        let monthData = self.getMonthList(month: month)
-        var result = GoalResult.percent
-        let goalAmount = monthData.goalAmount
-        let buyAmount = monthData.buyAmount
-        let winAmount = monthData.winAmount
-        let percent = ((winAmount - buyAmount) / buyAmount) * 100
-        
-        if Int(goalAmount) >= Int(buyAmount) {
-            result = .success
-        } else {
-            result = .fail
-        }
-        return [result : Int(percent)]
     }
 }
 
