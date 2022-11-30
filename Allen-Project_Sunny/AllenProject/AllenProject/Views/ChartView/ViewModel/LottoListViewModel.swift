@@ -11,16 +11,16 @@ class LottoListViewModel {
     
     typealias GoalResult = LottoListDataSourceController.GoalResult
     
-    // rowData에서 특정 월 데이터 뽑아내기
-    func getMonthList(month: Double) -> LottoItem {
-        let rowData = LottoItem.rowData
+    // rowData에서 특정 년도, 월 데이터 뽑아내기
+    func getMonthList(year: Double, month: Double) -> LottoItem {
+        let rowData = LottoItem.rowData.filter { $0.buyYear == year }   
         let monthData = rowData.filter { $0.buyMonth == month }
         return monthData[0]
     }
     
     // 특정 월의 당첨 퍼센테이지 구하기
-    func getMonthPercent(month: Double) -> [GoalResult : Int] {
-        let monthData = self.getMonthList(month: month)
+    func getMonthPercent(year: Double, month: Double) -> [GoalResult : Int] {
+        let monthData = self.getMonthList(year: year, month: month)
         var result = GoalResult.percent
         let goalAmount = monthData.goalAmount
         let buyAmount = monthData.buyAmount
@@ -36,32 +36,36 @@ class LottoListViewModel {
     }
     
     // 오늘 날짜 구하기
-    func getTodayDate() -> [String] {
+    func getTodayDate() -> [Double] {
         let yearFormatter = DateFormatter()
         let monthFormatter = DateFormatter()
         yearFormatter.dateFormat = "yyyy"
         monthFormatter.dateFormat = "MM"
         
         let date = Date()
-        let thisYear = yearFormatter.string(from: date)
-        let thisMonth = monthFormatter.string(from: date)
+        guard let thisYear = Double(yearFormatter.string(from: date)) else { return [] }
+        guard let thisMonth = Double(monthFormatter.string(from: date)) else { return [] }
+        
         return [ thisYear, thisMonth ]
     }
     
     // datePicker 구현시, 년도(1년부터 오늘 년도까지)와 월 설정
-    func getPickerDays() -> [[String]] {
-        var year: [String] = []
-        let month = ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"]
-        guard let thisYear = Int(self.getTodayDate()[0]) else { return []}
+    // 오늘 날짜 기준으로 picker component 구성
+    func getPickerDays() -> [[Double]] {
+        var year: [Double] = []
+        let month: [Double] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+        let thisYear = self.getTodayDate()[0]
         for num in stride(from: thisYear, to: 1, by: -1) {
-            year.append(String("\(num)년"))
+            year.append(num)
         }
         return [year, month]
     }
 }
 
-// TODO: delegate와 연결해서 pickerView 띄우기
+
 // delegate protocol 설정할때, AnyObject 명시하면 weak 사용으로 Memory Leak문제 해결 가능
-protocol DatePickerViewDelegate: AnyObject {
-    func didSelectedDate()
+// LottoListHeader -> ChartViewController간 selectedYear/Month 공유
+protocol LottoListHeaderDelegate: AnyObject {
+    func didSelectedDate(year: Double, month: Double)
 }
+

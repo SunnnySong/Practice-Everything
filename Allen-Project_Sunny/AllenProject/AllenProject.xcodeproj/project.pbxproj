@@ -107,8 +107,8 @@
 		4F794DDB29344F87002DB462 /* LottoList */ = {
 			isa = PBXGroup;
 			children = (
-				4F0D502429312C36007D1D6F /* LottoListCell.swift */,
 				4F794DD829329905002DB462 /* LottoListDataSourceController.swift */,
+				4F0D502429312C36007D1D6F /* LottoListCell.swift */,
 				4F794DDC29344FAA002DB462 /* LottoListHeader.swift */,
 			);
 			path = LottoList;

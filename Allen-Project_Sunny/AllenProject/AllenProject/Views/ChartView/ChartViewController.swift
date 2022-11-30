@@ -13,14 +13,26 @@ import SnapKit
 
 // dataSource 관련 참조: 보고 코드 정리하기. https://www.hackingwithswift.com/forums/ios/uitableview-diffable-data-source-section-headers-putting-data-source-outside-viewcontroller/2125
 
-// TODO: 오늘 년도에 맞게, 선택된 연도에 맞게 chart 로드 다시하기
-
 final class ChartViewController: UIViewController {
     
     // MARK: - Propertises
     
     let chartViewModel = ChartViewModel()
-    let lottoListViewModel = LottoListViewModel()
+    lazy var lottoListViewModel = LottoListViewModel()
+    
+    // 앱 실행시, 초기 설정은 오늘 년도와 날짜
+    lazy var selectedYear: Double = self.lottoListViewModel.getTodayDate()[0] {
+        didSet {
+            // selectedYear 변경시, 년도에 맞는 chartData 변경
+            self.setupChartData()
+        }
+    }
+    lazy var selectedMonth: Double = lottoListViewModel.getTodayDate()[1] {
+        didSet {
+            // selectedMonth 변경시, 월에 맞는 lottoList 변경
+            self.setupLottoListSnapshot()
+        }
+    }
     
     private let chartView: BarChartView = {
         let chartView = BarChartView()
@@ -44,6 +56,7 @@ final class ChartViewController: UIViewController {
         cv.isScrollEnabled = false
         cv.backgroundColor = .clear
         cv.rowHeight = 70
+        cv.allowsSelection = false
         return cv
     }()
     
@@ -69,7 +82,7 @@ final class ChartViewController: UIViewController {
     }
     
     // MARK: - Helpers
-
+    
     private func setupChartView() {
         view.addSubview(chartView)
         chartView.delegate = self
@@ -93,7 +106,7 @@ final class ChartViewController: UIViewController {
     }
     
     private func setupChartData() {
-        chartView.data = chartViewModel.setBarChartData()
+        chartView.data = chartViewModel.setBarChartData(year: selectedYear)
     }
     
     private func setupLottoListView() {
@@ -115,6 +128,7 @@ final class ChartViewController: UIViewController {
         // delegate로 설정한 header은 tableView의 section마다 달리는 header. 이것은 전체 tableView의 header
         let header = LottoListHeader(frame: .init(x: 0, y: 0, width: lottoListView.frame.size.width, height: 30))
         header.dateTextField.delegate = self
+        header.lottoListHeaderDelegate = self
         lottoListView.tableHeaderView = header
     }
     
@@ -133,10 +147,9 @@ final class ChartViewController: UIViewController {
     }
     
     private func setupLottoListSnapshot() {
-        guard let month = Double(lottoListViewModel.getTodayDate()[1]) else { return }
         
-        let data = lottoListViewModel.getMonthList(month: month)
-        guard let percentData = lottoListViewModel.getMonthPercent(month: month).first else { return }
+        let data = lottoListViewModel.getMonthList(year: selectedYear, month: selectedMonth)
+        guard let percentData = lottoListViewModel.getMonthPercent(year: selectedYear, month: selectedMonth).first else { return }
         
         let item1 = [Amount(amount: data.goalAmount, result: percentData.key, percent: percentData.value)]
         let item2 = [Amount(amount: data.buyAmount, result: percentData.key, percent: percentData.value)]
@@ -153,9 +166,6 @@ final class ChartViewController: UIViewController {
     }
     
     private func setupDatePicker() {
-//        view.addSubview(datePickerView)
-        
-//        datePickerView.dataSource = self
     }
 }
 
@@ -168,15 +178,21 @@ extension ChartViewController: ChartViewDelegate {
     // bar 클릭시 실행되는 함수
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         
-       print(entry)
+        print(entry)
+        self.selectedMonth = entry.x
+        
+        // LottoListHeader 에도 넘겨줘서 dateTextField.text 변경
+        let lottoListHeader = self.lottoListView.tableHeaderView as! LottoListHeader
+        lottoListHeader.selectedMonth = entry.x
     }
 }
 
 // DatePickerDelegate
-extension ChartViewController: DatePickerViewDelegate {
-    func didSelectedDate() {
-        print("ChartViewController) didSelectedDate")
-        
+extension ChartViewController: LottoListHeaderDelegate {
+    func didSelectedDate(year: Double, month: Double) {
+        self.selectedYear = year
+        self.selectedMonth = month
+        print("LottoListHeaderDelegate 공유: \(selectedYear), \(selectedMonth)")
     }
 }
 

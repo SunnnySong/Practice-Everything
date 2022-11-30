@@ -12,8 +12,10 @@ class ChartViewModel {
     
     // 1. BarChartDataEntry 변환하기.
     // BarChartDataEntry의 x, y는 모두 Double 타입
-    private func setBarChartDataEntry(completion: (BarChartDataSet) -> BarChartDataSet) -> BarChartDataSet {
-        let rowData = LottoItem.rowData
+    // chart는 년단위로 로드되기 때문에, year 파라미터로 받아 데이터 조회
+    private func setBarChartDataEntry(year: Double, completion: (BarChartDataSet) -> BarChartDataSet) -> BarChartDataSet {
+        // 년도 별 데이터 추출
+        let rowData = LottoItem.rowData.filter { $0.buyYear == year }
         // rowData를 BarChartDataEntry(x:,y:)로 변환
         let dataEntry = rowData.map { BarChartDataEntry(x: $0.buyMonth, y: $0.winAmount - $0.buyAmount)
         }
@@ -35,9 +37,9 @@ class ChartViewModel {
     }
     
     // 3. BarChartData 변환하기
-    func setBarChartData() -> BarChartData {
+    func setBarChartData(year: Double) -> BarChartData {
         
-        let chartData = setBarChartDataEntry { $0 }
+        let chartData = setBarChartDataEntry(year: year) { $0 }
         let data = BarChartData(dataSet: chartData)
         
         return data

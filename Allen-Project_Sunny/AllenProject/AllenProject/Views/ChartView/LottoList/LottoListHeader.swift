@@ -11,14 +11,31 @@ import SnapKit
 // collectionView에서 header : UICollectionReusableView
 class LottoListHeader: UIView {
     
-//    weak var datePickerViewDelegate: DatePickerViewDelegate?
-    let lottoListViewModel = LottoListViewModel()
+    weak var lottoListHeaderDelegate: LottoListHeaderDelegate?
+    
+    lazy var lottoListViewModel = LottoListViewModel()
     let getPickerDays = LottoListViewModel().getPickerDays()
     
-    var selectedYear: String = ""
-    var selectedMonth: String = ""
+    // 맨 처음 로드될때, LottoListView는 현재 날짜 기준 정렬
+    lazy var selectedYear: Double = self.lottoListViewModel.getTodayDate()[0] {
+        didSet {
+            // UIPickerView.selectRow() : picker 열었을 때, 초기 wheel 셋팅
+            self.setupSelectRow()
+            self.setupDateTextFieldText()
+            self.lottoListHeaderDelegate?.didSelectedDate(year: self.selectedYear, month: self.selectedMonth)
+        }
+    }
+    lazy var selectedMonth: Double = self.lottoListViewModel.getTodayDate()[1] {
+        didSet {
+            self.setupSelectRow()
+            self.setupDateTextFieldText()
+            self.lottoListHeaderDelegate?.didSelectedDate(year: self.selectedYear, month: self.selectedMonth)
+        }
+    }
+    // picker을 아무것도 누르지 않고 선택 버튼을 누를 경우를 위해 changingDay 초기값은 selectedYear/Month.
+    lazy var changingDay: [Double] = [self.selectedYear, self.selectedMonth]
     
-    let datePickerView = UIPickerView()
+    lazy var datePickerView = UIPickerView()
 
     let dateTextField: UITextField = {
         let tf = UITextField()
@@ -26,6 +43,7 @@ class LottoListHeader: UIView {
         tf.tintColor = .clear
         tf.textColor = .blue
         tf.font = .systemFont(ofSize: 17, weight: .bold)
+        
         return tf
     }()
     
@@ -33,10 +51,11 @@ class LottoListHeader: UIView {
         super.init(frame: frame)
         
         setupDateTextField()
-        setupDateTextFieldAttribute()
+        setupDateTextFieldText()
         
         setupPickerView()
         setupPickerToolBar()
+        setupSelectRow()
     }
     
     required init?(coder: NSCoder) {
@@ -46,23 +65,18 @@ class LottoListHeader: UIView {
     private func setupDateTextField() {
         self.addSubview(dateTextField)
         
-//        dateTextField.addTarget(nil, action: #selector(DateTextFieldAction), for: .touchUpInside)
-        
         dateTextField.snp.makeConstraints { make in
             make.left.top.right.equalToSuperview()
         }
     }
     
-    private func setupDateTextFieldAttribute() {
-        // 맨 처음 로드될때, LottoListView는 현재 날짜 기준 정렬
-        self.selectedYear = lottoListViewModel.getTodayDate()[0]
-        self.selectedMonth = lottoListViewModel.getTodayDate()[1]
+    private func setupDateTextFieldText() {
         
-        let monthText = NSMutableAttributedString(string: "\(self.selectedYear)년  \(self.selectedMonth)월 ")
+        let monthText = NSMutableAttributedString(string: "\(Int(self.selectedYear))년  \(Int(self.selectedMonth))월 ")
         
         // 2022년 : 흰색에 글씨 크게, 더 굵게
-        monthText.addAttribute(.foregroundColor, value: UIColor.white, range: NSRange(location: 0, length: self.selectedYear.count + 1))
-        monthText.addAttribute(.font, value: UIFont.systemFont(ofSize: 18, weight: .heavy), range: NSRange(location: 0, length: self.selectedYear.count + 1))
+//        monthText.addAttribute(.foregroundColor, value: UIColor.white, range: NSRange(location: 0, length: self.selectedYear.count + 1))
+//        monthText.addAttribute(.font, value: UIFont.systemFont(ofSize: 18, weight: .heavy), range: NSRange(location: 0, length: self.selectedYear.count + 1))
         
         // TODO: image 추가 안됌. >
 //        let imageAttachment = NSTextAttachment()
@@ -72,11 +86,6 @@ class LottoListHeader: UIView {
 //        imageView.image = UIImage(systemName: "chevron.right")?.withTintColor(.blue)
         dateTextField.attributedText = monthText
 //        dateTextField.rightView = imageView
-    }
-
-    @objc private func DateTextFieldAction() {
-//        self.datePickerViewDelegate?.didSelectedDate()
-        print("LottoListHeader) 클릭")
     }
     
     private func setupPickerView() {
@@ -89,9 +98,8 @@ class LottoListHeader: UIView {
 
         let toolBar = UIToolbar(frame: .init(x: 0, y: 0, width: 100, height: 35))
         
-        let cancelBtn = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancleAction))
-        
-        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))
+        let cancelBtn = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(cancleAction))
+        let doneBtn = UIBarButtonItem(title: "선택", style: .done, target: self, action: #selector(doneAction))
         
         // cancle과 done 버튼 사이 space 주기
         let spacingBtn = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
@@ -100,15 +108,33 @@ class LottoListHeader: UIView {
         dateTextField.inputAccessoryView = toolBar
     }
     
-    @objc func cancleAction() {
-        print("cancle")
-        self.endEditing(true)
+    // picker의 wheel 처음 로드 값
+    private func setupSelectRow() {
+        // pickerView는 마지막으로 select했던 row 로 wheel이 돌아가있음.
+        // 그 전 picker에서 날짜를 선택하고 취소버튼 눌렀을 경우, 다음 picker을 열었을 때 wheel이 돌아가 있지 않도록 설정
+        guard let yearRow = getPickerDays[0].firstIndex(of: selectedYear) else { return }
+        guard let monthRow = getPickerDays[1].firstIndex(of: selectedMonth) else { return }
+        self.datePickerView.selectRow(yearRow, inComponent: 0, animated: false)
+        self.datePickerView.selectRow(monthRow, inComponent: 1, animated: false)
+    }
+    
+    @objc func cancleAction() {        
+        self.setupSelectRow()
+        
+        // picker 내려가는 코드
+        dateTextField.resignFirstResponder()
     }
     
     @objc func doneAction() {
-        print("done")
+        // picker의 wheel로 날짜를 바꾸고 난 뒤, 선택 버튼을 눌러야 selectedYear/Month 변경.
+        // 취소 버튼 누를시, selectedYear/Month는 바뀌지 않음.
+        self.selectedYear = self.changingDay[0]
+        self.selectedMonth = self.changingDay[1]
+        dateTextField.resignFirstResponder()
     }
 }
+
+// MARK: - Extensions
 
 // PickerViewDataSource
 extension LottoListHeader: UIPickerViewDataSource {
@@ -121,15 +147,22 @@ extension LottoListHeader: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return getPickerDays[component][row]
+        switch component {
+        case 0:
+            return "\(Int(getPickerDays[component][row]))년"
+        case 1:
+            return "\(Int(getPickerDays[component][row]))월"
+        default:
+            return ""
+        }
     }
     
+    // picker 선택할때마다 작동
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let years =  getPickerDays[0][pickerView.selectedRow(inComponent: 0)]
-        let months = getPickerDays[1][pickerView.selectedRow(inComponent: 1)]
-        print(years, months)
-        self.selectedYear = years
-        self.selectedMonth = months
+        let changingYear =  getPickerDays[0][pickerView.selectedRow(inComponent: 0)]
+        let changingMonth = getPickerDays[1][pickerView.selectedRow(inComponent: 1)]
+        // picker의 wheel 변경할때마다 changingDay 변수 변경
+        self.changingDay = [changingYear, changingMonth]
     }
 }
 
