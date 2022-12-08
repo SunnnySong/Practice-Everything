@@ -9,10 +9,6 @@ import UIKit
 import Charts
 import SnapKit
 
-// bar 모서리 라운드 처리 : https://wlxo0401.oopy.io/8082412e-80e9-4f79-b2a1-164a9036fc6f
-
-// dataSource 관련 참조: 보고 코드 정리하기. https://www.hackingwithswift.com/forums/ios/uitableview-diffable-data-source-section-headers-putting-data-source-outside-viewcontroller/2125
-
 final class ChartViewController: UIViewController {
     
     // MARK: - Propertises
@@ -55,7 +51,7 @@ final class ChartViewController: UIViewController {
         let cv = UITableView(frame: .zero)
         cv.isScrollEnabled = false
         cv.backgroundColor = .clear
-        cv.rowHeight = 70
+        cv.rowHeight = 80
         cv.allowsSelection = false
         return cv
     }()
@@ -111,7 +107,7 @@ final class ChartViewController: UIViewController {
     
     private func setupLottoListView() {
         view.addSubview(lottoListView)
-        lottoListView.backgroundColor = .green
+        lottoListView.backgroundColor = .clear
         
         // 구분선 제거
         lottoListView.separatorStyle = .none
@@ -119,10 +115,10 @@ final class ChartViewController: UIViewController {
         self.lottoListView.register(LottoListCell.self, forCellReuseIdentifier: "\(LottoListCell.self)")
         
         lottoListView.snp.makeConstraints { make in
-            make.top.equalTo(chartView.snp.bottom).offset(20)
+            make.top.equalTo(chartView.snp.bottom).offset(40)
             make.left.right.equalToSuperview().inset(20)
 //            make.bottom.equalToSuperview().inset(50)
-            make.height.equalTo(380)
+            make.height.equalTo(400)
         }
     
         // delegate로 설정한 header은 tableView의 section마다 달리는 header. 이것은 전체 tableView의 header
@@ -137,9 +133,9 @@ final class ChartViewController: UIViewController {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "\(LottoListCell.self)", for: indexPath) as! LottoListCell
             
-            cell.amountLabel.text = String("\(Int(item.amount)) 원")
-            cell.sOrFLabel.text = item.result.title
-            cell.sOrFLabel.textColor = item.result.textColor
+            cell.amountLabel.text = String("\(Int(item.amount!)) 원")
+            cell.sOrFLabel.text = item.result?.title
+            cell.sOrFLabel.textColor = item.result?.textColor
             cell.setupCell(section: indexPath.section, percent: item.percent)
             return cell
         }
@@ -149,11 +145,11 @@ final class ChartViewController: UIViewController {
     private func setupLottoListSnapshot() {
         
         let data = lottoListViewModel.getMonthList(year: selectedYear, month: selectedMonth)
-        guard let percentData = lottoListViewModel.getMonthPercent(year: selectedYear, month: selectedMonth).first else { return }
+        let percentData = lottoListViewModel.getMonthPercent(year: selectedYear, month: selectedMonth).first
         
-        let item1 = [Amount(amount: data.goalAmount, result: percentData.key, percent: percentData.value)]
-        let item2 = [Amount(amount: data.buyAmount, result: percentData.key, percent: percentData.value)]
-        let item3 = [Amount(amount: data.winAmount, result: percentData.key, percent: percentData.value)]
+        let item1 = [Amount(amount: data.goalAmount, result: percentData?.key, percent: percentData?.value)]
+        let item2 = [Amount(amount: data.buyAmount, result: percentData?.key, percent: percentData?.value)]
+        let item3 = [Amount(amount: data.winAmount, result: percentData?.key, percent: percentData?.value)]
         
         var snapshot = NSDiffableDataSourceSnapshot<Section, Amount>()
         

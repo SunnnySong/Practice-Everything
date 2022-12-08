@@ -64,12 +64,12 @@ class LottoListCell: UITableViewCell {
         super.layoutSubviews()
         
         // cell간 간격 주기 위해 contentView에 올리고 Inset 설정
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 8, left: 15, bottom: 8, right: 15))
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 13, left: 15, bottom: 13, right: 15))
     }
     
     private func setupCell() {
         contentView.backgroundColor = .clear
-        self.backgroundColor = .purple
+        self.backgroundColor = .clear
         
         contentView.addSubview(mainImageView)
         mainImageView.snp.makeConstraints { make in
@@ -92,7 +92,7 @@ class LottoListCell: UITableViewCell {
         contentView.addSubview(sOrFLabel)
         sOrFLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(3)
-            make.right.equalTo(titleLabel)
+            make.left.equalTo(titleLabel).inset(5)
         }
         
         contentView.addSubview(amountLabel)
@@ -110,17 +110,17 @@ class LottoListCell: UITableViewCell {
         let imageAttachment = NSTextAttachment()
         
         if percent < 0 {
-            imageAttachment.image = UIImage(systemName: "arrowtriangle.down.fill")?.withTintColor(.blue)
-            attributedString.addAttribute(.foregroundColor, value: UIColor.blue, range: NSRange(location: 0, length: percentString.count))
+            imageAttachment.image = UIImage(systemName: "arrowtriangle.down.fill")?.withTintColor(UIColor(hex: "#4880EE"))
+            attributedString.addAttribute(.foregroundColor, value: UIColor(hex: "#4880EE"), range: NSRange(location: 0, length: percentString.count))
         } else {
-            imageAttachment.image = UIImage(systemName: "arrowtriangle.up.fill")?.withTintColor(.red)
-            attributedString.addAttribute(.foregroundColor, value: UIColor.red, range: NSRange(location: 0, length: percentString.count))
+            imageAttachment.image = UIImage(systemName: "arrowtriangle.up.fill")?.withTintColor(UIColor(hex: "EC6E59"))
+            attributedString.addAttribute(.foregroundColor, value: UIColor(hex: "EC6E59"), range: NSRange(location: 0, length: percentString.count))
         }
         attributedString.append(NSAttributedString(attachment: imageAttachment))
         sOrFLabel.attributedText = attributedString
     }
     
-    func setupCell(section: Int, percent: Int) {
+    func setupCell(section: Int, percent: Int?) {
         if section == 0 {
             titleLabel.text = Section.goal.title
             mainImage.image = Section.goal.image
@@ -131,6 +131,7 @@ class LottoListCell: UITableViewCell {
             titleLabel.text = Section.win.title
             mainImage.image = Section.win.image
             // 마지막 cell에서는 구매금액 - 당첨금액 으로 % 내야하기 때문에 따로 설정
+            guard let percent = percent else { return }
             self.setupPercent(percent: percent)
         }
     }

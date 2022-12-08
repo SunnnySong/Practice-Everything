@@ -65,8 +65,8 @@ class LottoListDataSourceController {
     struct Amount: Hashable {
         // 여기에 image, title 다 넣어서 만들어보기
         let id = UUID()
-        var amount: Double
-        var result: GoalResult
-        var percent: Int
+        var amount: Double?
+        var result: GoalResult?
+        var percent: Int?
     }
 }

@@ -13,7 +13,6 @@
 		4F690D502923664D006FAD36 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D4F2923664D006FAD36 /* DateViewController.swift */; };
 		4F690D522923665C006FAD36 /* LottoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D512923665C006FAD36 /* LottoViewController.swift */; };
 		4F690D5429236668006FAD36 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D5329236668006FAD36 /* ChartViewController.swift */; };
-		4F690D562923668D006FAD36 /* RandomMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D552923668D006FAD36 /* RandomMoneyViewController.swift */; };
 		4F690D5829237C7D006FAD36 /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D5729237C7D006FAD36 /* ChartViewModel.swift */; };
 		4F690D6229250E4E006FAD36 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D6129250E4E006FAD36 /* TabBarViewController.swift */; };
 		4F690D6429275040006FAD36 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F690D6329275040006FAD36 /* CustomTabBar.swift */; };
@@ -27,6 +26,7 @@
 		4F8711FD292280AC00BE353D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F8711FB292280AC00BE353D /* LaunchScreen.storyboard */; };
 		4F87120D29228D6300BE353D /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87120C29228D6300BE353D /* UIColor.swift */; };
 		4F87120F29228FA300BE353D /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87120E29228FA300BE353D /* Model.swift */; };
+		4FD72FED2938EC3400307B07 /* RandomMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD72FEC2938EC3400307B07 /* RandomMoneyViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +36,6 @@
 		4F690D4F2923664D006FAD36 /* DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
 		4F690D512923665C006FAD36 /* LottoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoViewController.swift; sourceTree = "<group>"; };
 		4F690D5329236668006FAD36 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
-		4F690D552923668D006FAD36 /* RandomMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomMoneyViewController.swift; sourceTree = "<group>"; };
 		4F690D5729237C7D006FAD36 /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
 		4F690D6129250E4E006FAD36 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		4F690D6329275040006FAD36 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
@@ -52,6 +51,7 @@
 		4F8711FE292280AC00BE353D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F87120C29228D6300BE353D /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		4F87120E29228FA300BE353D /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		4FD72FEC2938EC3400307B07 /* RandomMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomMoneyViewController.swift; sourceTree = "<group>"; };
 		7ACBDE1D8DC359A479EFF239 /* Pods_AllenProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AllenProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		98B7C7C99E683661F22251BE /* Pods-AllenProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AllenProject.release.xcconfig"; path = "Target Support Files/Pods-AllenProject/Pods-AllenProject.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -153,7 +153,7 @@
 				4F8711F4292280AC00BE353D /* HomeViewController.swift */,
 				4F690D4F2923664D006FAD36 /* DateViewController.swift */,
 				4F690D512923665C006FAD36 /* LottoViewController.swift */,
-				4F690D552923668D006FAD36 /* RandomMoneyViewController.swift */,
+				4FD72FEC2938EC3400307B07 /* RandomMoneyViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -335,6 +335,7 @@
 			files = (
 				4F8711F5292280AC00BE353D /* HomeViewController.swift in Sources */,
 				4F794DD929329905002DB462 /* LottoListDataSourceController.swift in Sources */,
+				4FD72FED2938EC3400307B07 /* RandomMoneyViewController.swift in Sources */,
 				4F87120D29228D6300BE353D /* UIColor.swift in Sources */,
 				4F690D522923665C006FAD36 /* LottoViewController.swift in Sources */,
 				4F690D6429275040006FAD36 /* CustomTabBar.swift in Sources */,
@@ -348,7 +349,6 @@
 				4F8711F3292280AC00BE353D /* SceneDelegate.swift in Sources */,
 				4F18EDBF2934CB2100A444B8 /* LottoListViewModel.swift in Sources */,
 				4F794DDD29344FAA002DB462 /* LottoListHeader.swift in Sources */,
-				4F690D562923668D006FAD36 /* RandomMoneyViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

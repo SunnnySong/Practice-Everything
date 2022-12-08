@@ -17,7 +17,6 @@
 		4FA12BF8290ED97D007F60DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FA12BF6290ED97D007F60DB /* LaunchScreen.storyboard */; };
 		4FA12C01290EDCCE007F60DB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA12C00290EDCCE007F60DB /* Model.swift */; };
 		4FA12C04290FC835007F60DB /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA12C03290FC835007F60DB /* TodoTableViewCell.swift */; };
-		4FA12C0729125E88007F60DB /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA12C0629125E88007F60DB /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +33,6 @@
 		4FA12BF9290ED97D007F60DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FA12C00290EDCCE007F60DB /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		4FA12C03290FC835007F60DB /* TodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
-		4FA12C0629125E88007F60DB /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		A9EEB9EACE3C3BB0EE4A7223 /* Pods-Realm_practice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Realm_practice.release.xcconfig"; path = "Target Support Files/Pods-Realm_practice/Pods-Realm_practice.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,7 +95,6 @@
 				4FA12BEF290ED97C007F60DB /* ViewController.swift */,
 				4FA12BF1290ED97C007F60DB /* Main.storyboard */,
 				4FA12C03290FC835007F60DB /* TodoTableViewCell.swift */,
-				4FA12C0629125E88007F60DB /* ViewModel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -235,7 +232,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FA12C04290FC835007F60DB /* TodoTableViewCell.swift in Sources */,
-				4FA12C0729125E88007F60DB /* ViewModel.swift in Sources */,
 				4FA12BF0290ED97C007F60DB /* ViewController.swift in Sources */,
 				4FA12BEC290ED97C007F60DB /* AppDelegate.swift in Sources */,
 				4FA12BEE290ED97C007F60DB /* SceneDelegate.swift in Sources */,

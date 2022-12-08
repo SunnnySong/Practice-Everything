@@ -9,13 +9,13 @@ import UIKit
 
 // 서버에서 받아오는 데이터 타입.. 이지만 일단 사용하기 쉬운 데이터 타입으로 임의 설정
 struct LottoItem {
-    var buyYear: Double
-    var buyMonth: Double    // BarChartDataEntry에 넣기 편리하도록 Double 타입 선언
-    var buyAmount: Double
-    var winAmount: Double
-    var goalAmount: Double
+    var buyYear: Double?
+    var buyMonth: Double?    // BarChartDataEntry에 넣기 편리하도록 Double 타입 선언
+    var buyAmount: Double?
+    var winAmount: Double?
+    var goalAmount: Double?
     
-    static var rowData: [LottoItem] = [
+    static var rowData: [LottoItem?] = [
         LottoItem(buyYear: 2022, buyMonth: 1, buyAmount: 5000, winAmount: 0, goalAmount: 150000),
         LottoItem(buyYear: 2022, buyMonth: 2, buyAmount: 55000, winAmount: 50000, goalAmount: 10000),
         LottoItem(buyYear: 2022, buyMonth: 3, buyAmount: 35000, winAmount: 100000, goalAmount: 30000),

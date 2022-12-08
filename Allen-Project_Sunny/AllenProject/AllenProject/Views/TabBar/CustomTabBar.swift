@@ -52,6 +52,9 @@ class CustomTabBar: UITabBar {
         let tabBarAppearance = UITabBarAppearance()
         tabBarAppearance.configureWithDefaultBackground()
         tabBarAppearance.backgroundColor = UIColor(hex: "202632")
+        // tabBarItem font 변경
+//        tabBarAppearance.stackedLayoutAppearance.normal.titleTextAttributes = [.font : UIFont.gmarksans(weight: .regular, size: ._11)]
+//        tabBarAppearance.stackedLayoutAppearance.selected.titleTextAttributes = [.font : UIFont.gmarksans(weight: .medium, size: ._11)]
         
         self.standardAppearance = tabBarAppearance
         self.scrollEdgeAppearance = tabBarAppearance

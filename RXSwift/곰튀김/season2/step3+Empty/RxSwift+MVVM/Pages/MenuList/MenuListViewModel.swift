@@ -69,7 +69,7 @@ class MenuListViewModel {
     
     init() {
         // Observable<Data> 타입을 decoding 
-        var DataDecoding = APIService.fetchAllMenusRx()
+        let DataDecoding = APIService.fetchAllMenusRx()
             .map { data -> [MenuItem] in
                 struct Response: Decodable {
                     let menus: [MenuItem]

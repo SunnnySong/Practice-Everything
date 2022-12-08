@@ -13,21 +13,30 @@ class LottoListViewModel {
     
     // rowData에서 특정 년도, 월 데이터 뽑아내기
     func getMonthList(year: Double, month: Double) -> LottoItem {
-        let rowData = LottoItem.rowData.filter { $0.buyYear == year }   
-        let monthData = rowData.filter { $0.buyMonth == month }
-        return monthData[0]
+        let data = LottoItem.rowData.filter { $0?.buyYear == year && $0?.buyMonth == month }
+        
+        // 만약 특정 년, 월의 데이터가 없다면?
+        if data.isEmpty {
+            return LottoItem(buyYear: year, buyMonth: month, buyAmount: 0, winAmount: 0, goalAmount: 0)
+        } else {
+            return data[0]!
+        }
     }
     
-    // 특정 월의 당첨 퍼센테이지 구하기
+    // 특정 년, 월의 당첨 퍼센테이지 구하기
     func getMonthPercent(year: Double, month: Double) -> [GoalResult : Int] {
         let monthData = self.getMonthList(year: year, month: month)
         var result = GoalResult.percent
-        let goalAmount = monthData.goalAmount
-        let buyAmount = monthData.buyAmount
-        let winAmount = monthData.winAmount
-        let percent = ((winAmount - buyAmount) / buyAmount) * 100
+        // TODO: 목표 금액이 없어도 구매금액과 당첨금액이 있을 수 있나? 만약 그렇다면 percent구하는 함수 따로 분리.
+        guard let goalAmount = monthData.goalAmount else { return [.percent : 0] }
+        guard let buyAmount = monthData.buyAmount else { return [.percent : 0] }
+        guard let winAmount = monthData.winAmount else { return [.percent : 0] }
+        var percent = ((winAmount - buyAmount) / buyAmount) * 100
         
-        if Int(goalAmount) >= Int(buyAmount) {
+        if goalAmount == 0 && buyAmount == 0 && winAmount == 0 {
+            result = .percent
+            percent = 0
+        } else if Int(goalAmount) >= Int(buyAmount) {
             result = .success
         } else {
             result = .fail
