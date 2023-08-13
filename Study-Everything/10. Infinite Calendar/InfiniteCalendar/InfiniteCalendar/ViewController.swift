@@ -30,6 +30,8 @@ final class ViewController: UIViewController {
 
     var dataSource: UICollectionViewDiffableDataSource<Section, [DayComponent]>!
 
+    var scrollDirection: ScrollDirection = .none
+
 //    private let calendar: UICollectionView = {
 //        let layout = UICollectionViewFlowLayout()
 //        layout.scrollDirection = .vertical
@@ -50,9 +52,9 @@ final class ViewController: UIViewController {
     private var baseDate: Date = Date() {
         didSet {
             updateDays()
-            totalCalendar.reloadData()
         }
     }
+
     private var days: [[DayComponent]] = []
 
     override func viewDidLoad() {
@@ -94,13 +96,10 @@ final class ViewController: UIViewController {
     }
 
     private func setupCenterXOffset() {
-        // 가운데 섹션의 인덱스를 계산합니다.
         let middleSectionIndex = totalCalendar.numberOfSections / 2
 
-        // 가운데 섹션의 x 좌표를 계산합니다.
         let middleSectionX = totalCalendar.collectionViewLayout.collectionViewContentSize.width / CGFloat(totalCalendar.numberOfSections) * CGFloat(middleSectionIndex)
 
-        // collectionView의 content offset을 가운데 섹션의 위치로 설정합니다.
         totalCalendar.setContentOffset(CGPoint(x: middleSectionX, y: 0), animated: false)
     }
 
@@ -140,15 +139,46 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
 
-        let standardOffset = totalCalendar.frame.width
+        switch scrollDirection {
+        case .left:
+            var snapshot = dataSource.snapshot()
+            snapshot.deleteAllItems()
 
-        if standardOffset > scrollView.contentOffset.x {
-            let calendar = Calendar(identifier: .gregorian)
-            baseDate = calendar.date(byAdding: .month, value: -1, to: baseDate) ?? .now
-        } else {
-            // 추후 오른쪽 스크롤 구현
+            baseDate = dateCalculator.calculatePreviousMonth(by: baseDate)
+            snapshot.appendSections([.pre, .now, .next])
+            snapshot.appendItems([days[0]], toSection: .pre)
+            snapshot.appendItems([days[1]], toSection: .now)
+            snapshot.appendItems([days[2]], toSection: .next)
+            dataSource.apply(snapshot, animatingDifferences: false)
+
+            let xPosition = view.frame.width * 1
+            scrollView.setContentOffset(CGPoint(x: xPosition, y: 0), animated: false)
+
+            print(baseDate)
+        case .none:
+            break
+        case .right:
+            print("hi")
         }
+    }
 
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+
+        switch targetContentOffset.pointee.x {
+        case 0:
+            scrollDirection = .left
+        case view.frame.width * 1:
+            scrollDirection = .none
+        case view.frame.width * 2:
+            scrollDirection = .right
+        default:
+            break
+        }
     }
 }
 
+enum ScrollDirection {
+    case left
+    case none
+    case right
+}
